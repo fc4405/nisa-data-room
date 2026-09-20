@@ -4,15 +4,14 @@ site:
   tagline: 新NISAを、一次情報と数字で確かめる
   description: 新NISAの制度・証券口座選び・積立の考え方を、金融庁などの一次情報と自動更新データ、無料シミュレーターで整理するサイトです。
   # ★ GitHub Pagesの場合: https://<ユーザー名>.github.io/<リポジトリ名>  独自ドメインならそのURL
-  base_url: "https://YOUR-USER.github.io/nisa-data-room"
+  base_url: "https://fc4405.github.io/nisa-data-room"
   language: ja
-  operator_name: "★運営者名（ハンドルネーム可）"
-  operator_profile: "★運営者のプロフィール（投資経験・運営の目的など。実体験を書くほど信頼性が上がります）"
-  contact_email: ""            # ★公開してよい連絡先。空ならお問い合わせ欄は非表示
+  operator_name: "ぼちゅ"
+  operator_profile: "個人で新NISAと資産形成について調べ、公的な一次情報と数字をもとに記事にまとめています。"
+  contact_email: ""
   ga_measurement_id: ""        # 任意: GA4の測定ID (G-XXXXXXX)
   google_site_verification: ""  # 任意: Search Consoleの「HTMLタグ」確認用 content 値
   adsense_client: ""           # 任意: AdSenseのクライアントID (ca-pub-...)。審査通過後に設定
-
 generation:
   # Claude API（GitHub Secretsの ANTHROPIC_API_KEY を使用）
   model: claude-sonnet-4-5

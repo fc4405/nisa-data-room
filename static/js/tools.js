@@ -1,7 +1,7 @@
 /* NISAデータ室 シミュレーター。scripts/calc.py と同じ計算式。入力値は送信されません。 */
 (function () {
   "use strict";
-  var LIFETIME = 18000000, GROWTH_SUB = 12000000, TSUMI = 1200000, GROWTH = 2400000, TOTAL = TSUMI + GROWTH;
+  var TAX = 0.20315, LIFETIME = 18000000, GROWTH_SUB = 12000000, TSUMI = 1200000, GROWTH = 2400000, TOTAL = TSUMI + GROWTH;
 
   function num(form, name, def) {
     var v = parseFloat(form.elements[name].value);
@@ -27,6 +27,11 @@
     }
     return { annual: y, tsumitate: t, growth: g, years: years, capped: yearly > TOTAL };
   }
+  function taxMerit(monthly, rate, years, initial, fee) {
+    var val = fv(monthly, rate - fee, years, initial), prin = initial + monthly * Math.round(years * 12);
+    var gain = val - prin, tax = Math.max(0, gain) * TAX;
+    return { value: val, principal: prin, gain: gain, tax: tax, netTaxable: val - tax, netNisa: val, overCap: prin > LIFETIME };
+  }
   function row(k, v, cls) { return '<div class="kv' + (cls ? " " + cls : "") + '"><dt>' + k + "</dt><dd>" + v + "</dd></div>"; }
   function warn(msg) { return '<p class="warn">' + msg + "</p>"; }
 
@@ -46,6 +51,22 @@
         rows += "<tr><th scope='row'>" + y + "年後</th><td>" + man(ini + m * y * 12) + "</td><td>" + man(fv(m, net, y, ini)) + "</td></tr>";
       }
       h += '<div class="table-wrap"><table><caption>年ごとの推移（概算）</caption><thead><tr><th scope="col">経過</th><th scope="col">元本</th><th scope="col">評価額</th></tr></thead><tbody>' + rows + "</tbody></table></div>";
+      return h;
+    },
+    "tax-merit": function (f) {
+      var m = Math.max(0, num(f, "monthly", 0)), ini = Math.max(0, num(f, "initial", 0));
+      var rate = num(f, "rate", 0) / 100, years = Math.max(1, Math.min(60, num(f, "years", 1))), fee = num(f, "fee", 0) / 100;
+      var r = taxMerit(m, rate, years, ini, fee);
+      var h = "<dl>" + row("売却時の評価額（概算）", man(r.value)) + row("投資した元本の合計", man(r.principal)) +
+        row("運用益（概算）", man(r.gain)) +
+        row("課税口座なら引かれる税金（20.315%）", man(r.tax)) +
+        row("課税口座の手取り（概算）", man(r.netTaxable)) +
+        row("NISA口座の手取り（概算）", man(r.netNisa)) +
+        row("NISAで省ける税金（概算）", "<strong>" + man(r.tax) + "</strong>", "big") + "</dl>";
+      if (r.gain <= 0) h += '<p class="hint">運用益が出ない前提のため、省ける税金は0円です。非課税のメリットは、利益が出たときにだけ発生します。</p>';
+      if (r.overCap) h += warn("元本の合計が生涯投資枠（1,800万円）を超えます。枠を超える分は課税口座での投資になるため、実際に省ける税金はこの計算より小さくなります。");
+      if (m * 12 > TOTAL) h += warn("年間の投資額が新NISAの年間上限（360万円）を超えています。超えた分はNISA口座では買えません。");
+      h += '<p class="hint">期間の最後に全額を売却した場合の単純な計算です。途中の分配金への課税、売却の時期、税制改正は考慮していません。NISA口座で出た損失は、他の口座の利益と通算できません。</p>';
       return h;
     },
     "fee-impact": function (f) {
@@ -83,5 +104,5 @@
     form.addEventListener("submit", function (e) { e.preventDefault(); run(); });
     run();
   });
-  if (typeof module !== "undefined") module.exports = { fv: fv, fillPlan: fillPlan };
+  if (typeof module !== "undefined") module.exports = { fv: fv, fillPlan: fillPlan, taxMerit: taxMerit };
 })();

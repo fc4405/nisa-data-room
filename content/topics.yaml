@@ -92,13 +92,6 @@ topics:
     intent: 口座開設後に何をすればよいか知りたい
     outline: [入金, 買う商品の確認（コスト・中身）, 積立設定, 配当の受取方法確認, 定期的な見直し]
     facts: [nisa_frames, dividend_method, tsumitate_products]
-  - id: nisa-bonus-toushi-hou
-    title_hint: ボーナスを新NISAで投資するときの考え方｜成長投資枠の使い方
-    keyword: ボーナス 新NISA 成長投資枠
-    category: tsumitate
-    intent: ボーナスをNISAで投資するときの注意点を知りたい
-    outline: [成長投資枠で一括投資できる, 上限, 購入時期を分ける考え方, 生活資金との切り分け]
-    facts: [growth_lump, nisa_frames, nisa_lifetime]
   - id: market-nikkei-vs-sp500-reading
     title_hint: 日経平均とS&P500を並べて見る｜自動更新データの読み方
     keyword: 日経平均 S&P500 比較 推移
@@ -115,3 +108,25 @@ topics:
     outline: [ドル建て資産と円建て評価額, 円高・円安の影響の方向, 為替の予想に頼らない考え方, 表の見方]
     facts: [nisa_frames]
     needs_market: true
+  - id: tokutei-loss-kurikoshi-shinkoku
+    title_hint: 特定口座の損失は3年間繰り越せる？確定申告が必要なケースを整理
+    keyword: 株 損失 繰越控除 3年 確定申告 特定口座
+    category: seido
+    intent: 課税口座で損失が出たときの繰越控除と確定申告のルールを知りたい
+    outline: [損益通算と繰越控除の違い, 翌年以後3年間の繰越, 申告が必要な理由（譲渡がなかった年も）, NISA口座との違い]
+    facts: [tokutei_loss, nisa_loss]
+  - id: tsumitate-taishou-kakudai-2027
+    title_hint: 2027年からつみたて投資枠の対象商品はどう変わる？改正内容を整理
+    keyword: つみたて投資枠 対象商品 拡充 2027 改正
+    category: seido
+    intent: 2027年からの対象商品の変更点を知りたい
+    outline: [現行の対象商品の要件, 対象株式指数の追加, 債券中心の投資信託の追加, 定期売却サービスの手数料, 利用者が確認すべきこと]
+    facts: [tsumitate_expansion_2027, tsumitate_requirements, tsumitate_products]
+  - id: nisa-haitou-tax-20315-rei
+    title_hint: 配当金の税金は20.315%｜NISAなら非課税になる金額を計算で確認
+    keyword: 配当金 税金 20.315% NISA 非課税
+    category: seido
+    intent: 配当にかかる税金の額と、NISAでの違いを数字で知りたい
+    outline: [配当にかかる税率の内訳, 配当額別の税額計算（算術のみ）, NISAで非課税になる条件, 受取方式の確認]
+    facts: [nisa_dividend_tax, dividend_method]
+

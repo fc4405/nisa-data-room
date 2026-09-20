@@ -23,7 +23,7 @@ SLUG_RE = re.compile(r"^[a-z0-9][a-z0-9\-]{2,80}$")
 SC_RE = re.compile(r"^\{\{(\w+):([\w\-.]+)\}\}[ \t]*$", re.M)
 LINK_RE = re.compile(r"\]\(([^)\s]+)\)")
 ASP_DOMAINS = ("a8.net", "px.a8.net", "afi-b.com", "moshimo.com", "accesstrade.net", "valuecommerce.com", "amzn.to")
-TOOL_KEYS = {"nisa-simulator", "fee-impact", "frame-planner"}
+TOOL_KEYS = {"nisa-simulator", "fee-impact", "frame-planner", "tax-merit"}
 # 「必ず儲かるわけではありません」のように、直後で打ち消している表現は誇大表現とみなさない
 NEGATED = re.compile(r"^.{0,14}?(では|わけでは|とは|という意味では|ことは)(ありません|ない|限りません|言えません)")
 
@@ -113,7 +113,7 @@ def check(meta: dict, body: str, cfg: dict, others: list[dict], min_chars: int |
                 errs.append(f"存在しないツールへのリンク: {href}")
         elif href.startswith("/"):
             if href.strip("/") not in ("market", "about", "editorial-policy", "ad-policy", "disclaimer", "privacy",
-                                       "articles", "tools", "changelog"):
+                                       "articles", "tools", "changelog", "glossary", "guide"):
                 errs.append(f"存在しない内部リンク: {href}")
         elif href.startswith("http"):
             if any(d in href for d in ASP_DOMAINS):

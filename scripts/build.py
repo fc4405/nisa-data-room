@@ -37,6 +37,8 @@ TOOLS = [
      "desc": "毎月の積立額・想定年利・期間から、将来の評価額と元本、生涯投資枠の消化状況を計算します。"},
     {"key": "fee-impact", "title": "信託報酬（コスト）の差シミュレーター",
      "desc": "年間コストが異なる2つの商品を長期で比べたとき、評価額にどれだけ差が出るかを計算します。"},
+    {"key": "tax-merit", "title": "新NISAの非課税メリット計算機",
+     "desc": "積立の結果として、課税口座なら引かれる税金（20.315%）と、NISAで省ける金額の目安を計算します。"},
     {"key": "frame-planner", "title": "新NISA枠の使い切りプランナー",
      "desc": "毎月・ボーナス月の投資額から、年間の枠の使い方と1,800万円に届くまでの年数を確認します。"},
 ]
@@ -60,7 +62,7 @@ class Site:
             autoescape=select_autoescape(["html", "xml"]),
         )
         self.env.globals.update(u=self.u, site=s, cfg=self.cfg, cats=self.cfg["categories"],
-                                year=today_jst().year, tools=TOOLS)
+                                year=today_jst().year, tools=TOOLS, og_image=f"{self.base_url}/static/img/ogp.png")
         self.env.filters["jp_date"] = lambda d: f"{d.year}年{d.month}月{d.day}日"
         self.cat_name = {c["slug"]: c["name"] for c in self.cfg["categories"]}
         self.published: set[str] = set()
@@ -117,6 +119,8 @@ class Site:
             extension_configs={"toc": {"toc_depth": "2-3", "permalink": False}},
         )
         out = md.convert(text)
+        # 本文中の表は、スマホで横にはみ出さないようスクロール可能な枠で包む（ショートコードの表は生成時に包み済み）
+        out = re.sub(r"<table>.*?</table>", lambda m: f'<div class="table-wrap table-text">{m.group(0)}</div>', out, flags=re.S)
 
         def block(m: re.Match) -> str:
             nonlocal has_aff
@@ -231,9 +235,18 @@ class Site:
                             canonical=self.abs(f"/category/{c['slug']}/"))
 
         # トップ
+        home_ld = {
+            "@context": "https://schema.org",
+            "@graph": [
+                {"@type": "WebSite", "name": self.cfg["site"]["name"], "url": self.abs("/"),
+                 "description": self.cfg["site"]["description"], "inLanguage": "ja"},
+                {"@type": "Organization", "name": self.cfg["site"]["name"], "url": self.abs("/"),
+                 "logo": self.abs("/static/img/ogp.png")},
+            ],
+        }
         self.render("index.html", "index.html", articles=articles[:6], market=market, market_asof=market_asof,
                     title=None, description=self.cfg["site"]["description"], canonical=self.abs("/"),
-                    market_table=shortcodes.market_table())
+                    market_table=shortcodes.market_table(), jsonld=json.dumps(home_ld, ensure_ascii=False))
 
         # ツール
         self.render("tools_index.html", "tools/index.html", title="無料シミュレーター一覧",
@@ -251,7 +264,12 @@ class Site:
         # 固定ページ
         for p in sorted((ROOT / "content" / "pages").glob("*.md")):
             st = self.cfg["site"]
-            contact = st["contact_email"] or "（連絡先は準備中です）"
+            contacts = []
+            if st.get("contact_url"):
+                contacts.append(f"[お問い合わせフォーム]({st['contact_url']})")
+            if st.get("contact_email"):
+                contacts.append(st["contact_email"])
+            contact = " / ".join(contacts) or "（連絡先は準備中です）"
             raw = p.read_text(encoding="utf-8")
             for k, v in {"site_name": st["name"], "operator_name": st["operator_name"],
                          "operator_profile": st["operator_profile"], "contact": contact}.items():

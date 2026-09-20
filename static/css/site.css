@@ -66,6 +66,8 @@ th,td{padding:10px 14px;border-top:1px solid var(--line);text-align:right;white-
 thead th{background:var(--brand-soft);color:var(--ink);text-align:right;font-size:.85rem}
 thead th:first-child,tbody th{text-align:left}
 tbody th{font-weight:600}
+.table-text table{min-width:0}
+.table-text th,.table-text td{text-align:left;white-space:normal;vertical-align:top}
 .table-note{font-size:.82rem;color:var(--muted);line-height:1.7;margin:.5em 0 1.5em}
 .cta,.tool-callout{margin:2em 0;padding:20px;background:var(--surface);border:2px solid var(--brand);border-radius:var(--radius);box-shadow:var(--shadow)}
 .cta-label{display:inline-block;margin:0 0 6px;font-size:.72rem;font-weight:700;background:var(--warn-bg);color:var(--warn-ink);padding:1px 8px;border-radius:4px}

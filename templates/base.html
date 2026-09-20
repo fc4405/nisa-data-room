@@ -11,7 +11,10 @@
 <meta property="og:description" content="{{ description }}">
 <meta property="og:type" content="{{ og_type or 'website' }}">
 {% if canonical %}<meta property="og:url" content="{{ canonical }}">{% endif %}
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="{{ og_image }}">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{{ og_image }}">
 {% if site.google_site_verification %}<meta name="google-site-verification" content="{{ site.google_site_verification }}">
 {% endif %}<meta name="theme-color" content="#0f5c4d">
 <link rel="alternate" type="application/rss+xml" title="{{ site.name }}" href="{{ u('/feed.xml') }}">
@@ -28,6 +31,7 @@
   <div class="wrap header-in">
     <a class="brand" href="{{ u('/') }}"><span class="brand-mark" aria-hidden="true"></span>{{ site.name }}</a>
     <nav class="nav" aria-label="メイン">
+      <a href="{{ u('/guide/') }}">ガイド</a>
       <a href="{{ u('/articles/') }}">記事</a>
       <a href="{{ u('/tools/') }}">シミュレーター</a>
       <a href="{{ u('/market/') }}">マーケット</a>
@@ -43,6 +47,7 @@
     <p class="foot-brand">{{ site.name }}<span> {{ site.tagline }}</span></p>
     <nav class="foot-nav" aria-label="フッター">
       <a href="{{ u('/about/') }}">運営者情報</a>
+      <a href="{{ u('/glossary/') }}">用語集</a>
       <a href="{{ u('/editorial-policy/') }}">編集方針・AIの使い方</a>
       <a href="{{ u('/ad-policy/') }}">広告について</a>
       <a href="{{ u('/disclaimer/') }}">免責事項</a>

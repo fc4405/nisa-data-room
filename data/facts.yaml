@@ -1,7 +1,8 @@
-# 注意: URLの実在は確認済みだが、各claimの記述は公式ページで最終確認してから運用すること（初回セットアップ手順に含めています）。
+# 2026-09-20: 各claimを公式ページ（金融庁・国税庁・財務省・日本証券業協会）の本文と照合済み。照合した記述だけを収録している。
 # 記事生成AIが「使ってよい事実」の一覧。ここに無い制度・数値は書かせない（幻覚対策の要）。
 # 追加・更新する時は必ず source(URL) を付け、verified_at を更新すること。
-# ★ 2026年度税制改正で変わる内容（18歳未満のつみたて投資枠 等）は未確定・未収録。反映は公式資料で確認後に追記。
+# 令和8年度税制改正（令和8年3月31日成立）の内容は、財務省・金融庁の資料で確認できた範囲のみ収録（nisa_kids, tsumitate_expansion_2027）。
+# 制度は改正されるため、記事に使う前と、四半期ごとに公式ページで再確認すること。
 facts:
   - id: nisa_frames
     claim: 新NISAの年間投資枠は、つみたて投資枠が120万円、成長投資枠が240万円で、併用でき、合計で年間360万円まで。
@@ -24,26 +25,46 @@ facts:
     source: {title: NISAを知る（金融庁 NISA特設ウェブサイト）, url: "https://www.fsa.go.jp/policy/nisa2/know/index.html"}
     verified_at: "2026-09-20"
   - id: nisa_age
-    claim: NISA口座を開設できるのは、日本国内に居住する18歳以上の方。口座は1人1口座で、金融機関は年単位で変更できる。
+    claim: 2026年時点で、NISA口座を開設できるのは日本国内に居住する18歳以上（利用する年の1月1日時点で成人）の方。口座は1人1口座で、金融機関は年単位で変更できる。
     source: {title: NISAを知る（金融庁 NISA特設ウェブサイト）, url: "https://www.fsa.go.jp/policy/nisa2/know/index.html"}
     verified_at: "2026-09-20"
   - id: nisa_tax
-    claim: 通常、株式や投資信託の売却益・配当には20.315%（所得税・復興特別所得税15.315%と住民税5%）の税金がかかる。NISA口座内の運用益や配当は非課税になる。
+    claim: 上場株式等を売却して得た利益（譲渡益）には、通常、所得税15％・住民税5％に復興特別所得税（基準所得税額×2.1％）が加わり、合計20.315％の税金がかかる。NISA口座内の売却益は非課税になる。
     source: {title: No.1463 株式等を譲渡したときの課税（国税庁）, url: "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1463.htm"}
     verified_at: "2026-09-20"
+  - id: nisa_dividend_tax
+    claim: 上場株式等の配当には、通常、所得税・復興特別所得税15.315％が源泉徴収され、ほかに住民税5％がかかる（合計20.315％）。NISA口座内で株式数比例配分方式により受け取る配当は非課税になる。
+    source: {title: No.1330 上場株式等の配当等に係る配当所得（国税庁）, url: "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1330.htm"}
+    verified_at: "2026-09-20"
   - id: nisa_loss
-    claim: NISA口座で生じた損失は税務上ないものとされ、ほかの口座（特定口座・一般口座）の利益との損益通算や、翌年以降への繰越控除はできない。
-    source: {title: よくある質問（金融庁 NISA特設ウェブサイト）, url: "https://www.fsa.go.jp/policy/nisa2/question/index.html"}
+    claim: NISA口座で生じた損失は、特定口座や一般口座で保有する上場株式等の配当・譲渡益との損益通算も、翌年以降への繰越控除もできない。
+    source: {title: No.1535 NISA制度（国税庁）, url: "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1535.htm"}
     verified_at: "2026-09-20"
   - id: tsumitate_products
-    claim: つみたて投資枠の対象は、長期の積立・分散投資に適した一定の要件を満たすとして金融庁に届け出られた投資信託に限られる。成長投資枠は上場株式や投資信託など幅広い商品を買えるが、一部の商品は対象外。
-    source: {title: NISAを知る（金融庁 NISA特設ウェブサイト）, url: "https://www.fsa.go.jp/policy/nisa2/know/index.html"}
+    claim: つみたて投資枠の対象は、積立・分散投資に適した一定の要件を満たす公募株式投資信託に限られる。成長投資枠は上場株式や投資信託、ETF、REITなど幅広い商品を買えるが、整理銘柄・監理銘柄や信託期間20年未満、毎月分配型の投資信託などは対象外。
+    source: {title: NISAを利用する皆さまへ（金融庁）, url: "https://www.fsa.go.jp/policy/nisa2/about/nisa2024/slide_202406.pdf"}
+    verified_at: "2026-09-20"
+  - id: tsumitate_requirements
+    claim: つみたて投資枠の対象投資信託の要件には、信託契約期間が無期限または20年以上であること、毎月分配型でないこと、販売手数料が0％（ノーロード）であること、信託報酬が低水準であることなどがある。
+    source: {title: NISAを利用する皆さまへ（金融庁）, url: "https://www.fsa.go.jp/policy/nisa2/about/nisa2024/slide_202406.pdf"}
     verified_at: "2026-09-20"
   - id: growth_lump
-    claim: つみたて投資枠は定期的な積立での購入が前提。成長投資枠は一括での購入もできる。
+    claim: 成長投資枠は個別銘柄などへの一括での購入もでき、積立での購入もできる。つみたて投資枠は積立投資のための枠。
     source: {title: NISAを知る（金融庁 NISA特設ウェブサイト）, url: "https://www.fsa.go.jp/policy/nisa2/know/index.html"}
     verified_at: "2026-09-20"
   - id: dividend_method
-    claim: 国内上場株式などの配当金を非課税にするには、証券会社で受け取る「株式数比例配分方式」を選ぶ必要がある。
-    source: {title: よくある質問（金融庁 NISA特設ウェブサイト）, url: "https://www.fsa.go.jp/policy/nisa2/question/index.html"}
+    claim: 国内上場株式などの配当金をNISA口座で非課税で受け取るには、証券会社で受け取る「株式数比例配分方式」を選ぶ必要がある。配当金領収証方式などでは非課税にならない。
+    source: {title: NISA口座における上場株式の配当金等受取方式に関する注意事項（日本証券業協会）, url: "https://www.jsda.or.jp/shijyo/seido/tax/nisahaitoukin.html"}
+    verified_at: "2026-09-20"
+  - id: nisa_kids
+    claim: 令和8年度税制改正（令和8年3月31日成立）で、2027年（令和9年）からつみたて投資枠の対象年齢が0〜17歳に拡充される。子が0〜17歳の間は、年間投資枠60万円、非課税保有限度額600万円。子が12歳以降で子の同意がある場合に限り、親権者等による払出しができる。
+    source: {title: 令和8年度税制改正（財務省 広報誌「ファイナンス」2026年4月号）, url: "https://www.mof.go.jp/public_relations/finance/202604/202604c.html"}
+    verified_at: "2026-09-20"
+  - id: tsumitate_expansion_2027
+    claim: 令和8年度税制改正では、つみたて投資枠の対象商品について、対象となる株式指数の追加、債券を中心とする投資信託の追加、定期売却サービスに限った手数料の徴収の容認が盛り込まれている（2027年〜）。
+    source: {title: 令和8（2026）年度税制改正について（金融庁）, url: "https://www.fsa.go.jp/news/r7/sonota/20251226-2/01.pdf"}
+    verified_at: "2026-09-20"
+  - id: tokutei_loss
+    claim: 課税口座で生じた上場株式等の譲渡損失は、その年の上場株式等の配当所得（申告分離課税を選択したものに限る）などと損益通算でき、引ききれない損失は翌年以後3年間繰り越して控除できる。適用を受けるには確定申告が必要で、譲渡がなかった年も繰越のための申告が必要。
+    source: {title: No.1474 上場株式等に係る譲渡損失の損益通算及び繰越控除（国税庁）, url: "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1474.htm"}
     verified_at: "2026-09-20"

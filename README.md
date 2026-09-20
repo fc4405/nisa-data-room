@@ -5,6 +5,7 @@ GitHub Pages（無料）で公開し、GitHub Actions が毎日更新します�
 
 - **はじめに読む: [SETUP.md](SETUP.md)**（最初の1回だけ必要な手作業）
 - 収益の見通し・リスク: [docs/ROADMAP.md](docs/ROADMAP.md)
+- ASP登録・提携申請・Search Console登録の手順: [docs/ASP_GUIDE.md](docs/ASP_GUIDE.md)
 
 ## 自動で回るもの
 

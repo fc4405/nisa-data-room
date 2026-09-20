@@ -1,0 +1,11 @@
+<form class="calc" data-tool="tax-merit" novalidate>
+  <div class="grid2">
+    <label>毎月の積立額（円）<input type="number" name="monthly" value="30000" min="0" step="1000" inputmode="numeric"></label>
+    <label>最初にまとめて投資する額（円）<input type="number" name="initial" value="0" min="0" step="10000" inputmode="numeric"></label>
+    <label>想定年利（%）<input type="number" name="rate" value="4" min="-20" max="30" step="0.1" inputmode="decimal"></label>
+    <label>運用期間（年）<input type="number" name="years" value="20" min="1" max="60" step="1" inputmode="numeric"></label>
+    <label>年間コスト・信託報酬（%）<input type="number" name="fee" value="0.2" min="0" max="5" step="0.01" inputmode="decimal"></label>
+  </div>
+  <p class="hint">課税口座で上場株式等の売却益にかかる税率20.315%（所得税15%＋復興特別所得税＋住民税5%）で計算します。数値はあくまで仮定で、実際の成果や税額とは異なります。</p>
+</form>
+<section class="result" aria-live="polite" data-result="tax-merit"></section>

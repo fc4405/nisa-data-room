@@ -61,6 +61,27 @@ class CalcTests(unittest.TestCase):
         for c, v in zip(plans, out["fp"]):
             self.assertAlmostEqual(calc.fill_plan(c[0], c[1])["years"], v, places=6)
 
+    def test_tax_merit_python_and_js(self):
+        r = calc.tax_merit(30_000, 0.05, 20, 0, 0.002)
+        self.assertAlmostEqual(r["tax"], r["gain"] * 0.20315)
+        self.assertAlmostEqual(r["net_taxable"], r["value"] - r["tax"])
+        self.assertEqual(calc.tax_merit(30_000, -0.05, 10)["tax"], 0)  # 損失なら税額0
+        self.assertTrue(calc.tax_merit(100_000, 0.03, 20)["over_cap"])  # 元本2,400万円
+        # 100万円の利益 -> 203,150円（記事の数値例と一致）
+        self.assertAlmostEqual(1_000_000 * calc.TAX_RATE, 203_150)
+        js = ROOT / "static" / "js" / "tools.js"
+        cases = [(30_000, 0.05, 20, 0, 0.002), (100_000, 0.03, 10, 500_000, 0.0), (50_000, -0.02, 15, 0, 0.001)]
+        code = ("const t=require(%r);console.log(JSON.stringify(%s.map(c=>{const r=t.taxMerit(c[0],c[1],c[2],c[3],c[4]);return [r.tax,r.netTaxable,r.gain]})))"
+                % (str(js), json.dumps(cases)))
+        res = subprocess.run(["node", "-e", code], capture_output=True, text=True)
+        if res.returncode != 0:
+            self.skipTest("node が使えません: " + res.stderr[:200])
+        for c, v in zip(cases, json.loads(res.stdout)):
+            p = calc.tax_merit(*c)
+            self.assertAlmostEqual(p["tax"], v[0], places=3)
+            self.assertAlmostEqual(p["net_taxable"], v[1], places=3)
+            self.assertAlmostEqual(p["gain"], v[2], places=3)
+
 
 class MarketTests(unittest.TestCase):
     CSV = "DATE,SP500\n2026-01-02,100\n2026-01-05,.\n2026-02-02,110\n2026-03-02,105\n2026-04-01,120\n2026-04-02,90\n"

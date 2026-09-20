@@ -10,6 +10,7 @@ GROWTH_SUBCAP = 12_000_000       # うち成長投資枠の上限
 TSUMITATE_ANNUAL = 1_200_000     # つみたて投資枠 年間
 GROWTH_ANNUAL = 2_400_000        # 成長投資枠 年間
 TOTAL_ANNUAL = TSUMITATE_ANNUAL + GROWTH_ANNUAL  # 3,600,000
+TAX_RATE = 0.20315               # 上場株式等の譲渡益: 所得税15% + 復興特別所得税(15%×2.1%) + 住民税5%
 
 
 def future_value(monthly: float, annual_rate: float, years: float, initial: float = 0.0) -> float:
@@ -66,3 +67,15 @@ def fill_plan(yearly: float, done: float = 0.0) -> dict:
         else:
             years = y_g + (remain - y_g * y) / t
     return {"annual": y, "tsumitate": t, "growth": g, "years": years, "capped": yearly > TOTAL_ANNUAL}
+
+
+def tax_merit(monthly: float, annual_rate: float, years: float, initial: float = 0.0, fee: float = 0.0) -> dict:
+    """積立の最終時点で全額を売却したと仮定して、課税口座なら引かれる税額（=NISAで省ける税額）を求める。
+    簡略化: 途中の分配金課税・売却時期・NISA枠の超過分・税制改正は考慮しない。
+    """
+    value = future_value(monthly, net_rate(annual_rate, fee), years, initial)
+    prin = principal(monthly, years, initial)
+    gain = value - prin
+    tax = max(0.0, gain) * TAX_RATE
+    return {"value": value, "principal": prin, "gain": gain, "tax": tax,
+            "net_taxable": value - tax, "net_nisa": value, "over_cap": prin > LIFETIME_CAP}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block main %}
+<section class="hero"><div class="wrap">
+  <h1>{{ site.tagline }}</h1>
+  <p class="lead">{{ site.description }}</p>
+  <p class="hero-actions"><a class="btn" href="{{ u('/tools/nisa-simulator/') }}">積立シミュレーターを使う</a> <a class="btn btn-ghost" href="{{ u('/articles/') }}">記事を読む</a></p>
+</div></section>
+
+<div class="wrap page">
+  <section>
+    <h2 class="sec">新着・更新記事</h2>
+    <ul class="cards">{% for r in articles %}
+      <li class="card"><a href="{{ u(r.url) }}"><span class="tag">{{ r.cat_name }}</span><strong>{{ r.title }}</strong><span class="card-desc">{{ r.description }}</span><span class="card-date">{{ r.updated|jp_date }}更新</span></a></li>
+    {% endfor %}</ul>
+    <p class="more"><a href="{{ u('/articles/') }}">記事一覧へ &rarr;</a></p>
+  </section>
+
+  <section>
+    <h2 class="sec">無料シミュレーター</h2>
+    <ul class="cards">{% for t in tools %}
+      <li class="card"><a href="{{ u('/tools/' ~ t.key ~ '/') }}"><span class="tag">ツール</span><strong>{{ t.title }}</strong><span class="card-desc">{{ t.desc }}</span></a></li>
+    {% endfor %}</ul>
+  </section>
+
+  <section>
+    <h2 class="sec">マーケットデータ<small>{% if market_asof %}（{{ market_asof }}時点・自動更新）{% endif %}</small></h2>
+    {{ market_table|safe }}
+    <p class="more"><a href="{{ u('/market/') }}">チャートを見る &rarr;</a></p>
+  </section>
+
+  <section class="trust">
+    <h2 class="sec">このサイトの方針</h2>
+    <ul class="checks">
+      <li>制度の説明は金融庁など<strong>一次情報</strong>を出典として明記します。</li>
+      <li>数字はすべて<strong>前提つきの計算</strong>で、将来を保証する表現は使いません。</li>
+      <li>広告（PR）を含む場合は必ず表示し、<strong>評価は報酬で変えません</strong>。</li>
+      <li>AIの支援を受けて作成していることを<a href="{{ u('/editorial-policy/') }}">公開しています</a>。</li>
+    </ul>
+  </section>
+</div>
+{% endblock %}

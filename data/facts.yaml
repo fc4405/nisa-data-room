@@ -1,0 +1,49 @@
+# 注意: URLの実在は確認済みだが、各claimの記述は公式ページで最終確認してから運用すること（初回セットアップ手順に含めています）。
+# 記事生成AIが「使ってよい事実」の一覧。ここに無い制度・数値は書かせない（幻覚対策の要）。
+# 追加・更新する時は必ず source(URL) を付け、verified_at を更新すること。
+# ★ 2026年度税制改正で変わる内容（18歳未満のつみたて投資枠 等）は未確定・未収録。反映は公式資料で確認後に追記。
+facts:
+  - id: nisa_frames
+    claim: 新NISAの年間投資枠は、つみたて投資枠が120万円、成長投資枠が240万円で、併用でき、合計で年間360万円まで。
+    source: {title: NISAを知る（金融庁 NISA特設ウェブサイト）, url: "https://www.fsa.go.jp/policy/nisa2/know/index.html"}
+    verified_at: "2026-09-20"
+  - id: nisa_lifetime
+    claim: 非課税で保有できる限度額（生涯投資枠）は1人1,800万円。そのうち成長投資枠は1,200万円まで。
+    source: {title: NISAを知る（金融庁 NISA特設ウェブサイト）, url: "https://www.fsa.go.jp/policy/nisa2/know/index.html"}
+    verified_at: "2026-09-20"
+  - id: nisa_book_value
+    claim: 生涯投資枠は購入時の取得価額（簿価）で管理される。値上がりしても枠は増えず、値下がりしても枠は減らない。
+    source: {title: よくある質問（金融庁 NISA特設ウェブサイト）, url: "https://www.fsa.go.jp/policy/nisa2/question/index.html"}
+    verified_at: "2026-09-20"
+  - id: nisa_reuse
+    claim: NISA口座で保有する商品を売却すると、その簿価分の枠が翌年以降に再利用できる（同じ年内には復活しない）。
+    source: {title: NISAを知る（金融庁 NISA特設ウェブサイト）, url: "https://www.fsa.go.jp/policy/nisa2/know/index.html"}
+    verified_at: "2026-09-20"
+  - id: nisa_permanent
+    claim: 新NISAは制度が恒久化され、非課税で保有できる期間に期限がない（無期限）。
+    source: {title: NISAを知る（金融庁 NISA特設ウェブサイト）, url: "https://www.fsa.go.jp/policy/nisa2/know/index.html"}
+    verified_at: "2026-09-20"
+  - id: nisa_age
+    claim: NISA口座を開設できるのは、日本国内に居住する18歳以上の方。口座は1人1口座で、金融機関は年単位で変更できる。
+    source: {title: NISAを知る（金融庁 NISA特設ウェブサイト）, url: "https://www.fsa.go.jp/policy/nisa2/know/index.html"}
+    verified_at: "2026-09-20"
+  - id: nisa_tax
+    claim: 通常、株式や投資信託の売却益・配当には20.315%（所得税・復興特別所得税15.315%と住民税5%）の税金がかかる。NISA口座内の運用益や配当は非課税になる。
+    source: {title: No.1463 株式等を譲渡したときの課税（国税庁）, url: "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1463.htm"}
+    verified_at: "2026-09-20"
+  - id: nisa_loss
+    claim: NISA口座で生じた損失は税務上ないものとされ、ほかの口座（特定口座・一般口座）の利益との損益通算や、翌年以降への繰越控除はできない。
+    source: {title: よくある質問（金融庁 NISA特設ウェブサイト）, url: "https://www.fsa.go.jp/policy/nisa2/question/index.html"}
+    verified_at: "2026-09-20"
+  - id: tsumitate_products
+    claim: つみたて投資枠の対象は、長期の積立・分散投資に適した一定の要件を満たすとして金融庁に届け出られた投資信託に限られる。成長投資枠は上場株式や投資信託など幅広い商品を買えるが、一部の商品は対象外。
+    source: {title: NISAを知る（金融庁 NISA特設ウェブサイト）, url: "https://www.fsa.go.jp/policy/nisa2/know/index.html"}
+    verified_at: "2026-09-20"
+  - id: growth_lump
+    claim: つみたて投資枠は定期的な積立での購入が前提。成長投資枠は一括での購入もできる。
+    source: {title: NISAを知る（金融庁 NISA特設ウェブサイト）, url: "https://www.fsa.go.jp/policy/nisa2/know/index.html"}
+    verified_at: "2026-09-20"
+  - id: dividend_method
+    claim: 国内上場株式などの配当金を非課税にするには、証券会社で受け取る「株式数比例配分方式」を選ぶ必要がある。
+    source: {title: よくある質問（金融庁 NISA特設ウェブサイト）, url: "https://www.fsa.go.jp/policy/nisa2/question/index.html"}
+    verified_at: "2026-09-20"

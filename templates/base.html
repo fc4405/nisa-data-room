@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="{{ site.language }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% if title %}{{ title }} | {{ site.name }}{% else %}{{ site.name }} - {{ site.tagline }}{% endif %}</title>
+<meta name="description" content="{{ description }}">
+{% if canonical %}<link rel="canonical" href="{{ canonical }}">{% endif %}
+<meta property="og:site_name" content="{{ site.name }}">
+<meta property="og:title" content="{{ title or site.name }}">
+<meta property="og:description" content="{{ description }}">
+<meta property="og:type" content="{{ og_type or 'website' }}">
+{% if canonical %}<meta property="og:url" content="{{ canonical }}">{% endif %}
+<meta name="twitter:card" content="summary">
+{% if site.google_site_verification %}<meta name="google-site-verification" content="{{ site.google_site_verification }}">
+{% endif %}<meta name="theme-color" content="#0f5c4d">
+<link rel="alternate" type="application/rss+xml" title="{{ site.name }}" href="{{ u('/feed.xml') }}">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f5c4d'/%3E%3Cpath d='M6 22l6-7 5 4 9-11' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="{{ u('/static/css/site.css') }}">
+{% if jsonld %}<script type="application/ld+json">{{ jsonld|safe }}</script>{% endif %}
+{% if site.ga_measurement_id %}<script async src="https://www.googletagmanager.com/gtag/js?id={{ site.ga_measurement_id }}"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','{{ site.ga_measurement_id }}');</script>{% endif %}
+{% if site.adsense_client %}<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ site.adsense_client }}" crossorigin="anonymous"></script>{% endif %}
+</head>
+<body>
+<a class="skip" href="#main">本文へ移動</a>
+<header class="site-header">
+  <div class="wrap header-in">
+    <a class="brand" href="{{ u('/') }}"><span class="brand-mark" aria-hidden="true"></span>{{ site.name }}</a>
+    <nav class="nav" aria-label="メイン">
+      <a href="{{ u('/articles/') }}">記事</a>
+      <a href="{{ u('/tools/') }}">シミュレーター</a>
+      <a href="{{ u('/market/') }}">マーケット</a>
+      <a href="{{ u('/about/') }}">運営者情報</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+{% block main %}{% endblock %}
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="foot-brand">{{ site.name }}<span> {{ site.tagline }}</span></p>
+    <nav class="foot-nav" aria-label="フッター">
+      <a href="{{ u('/about/') }}">運営者情報</a>
+      <a href="{{ u('/editorial-policy/') }}">編集方針・AIの使い方</a>
+      <a href="{{ u('/ad-policy/') }}">広告について</a>
+      <a href="{{ u('/disclaimer/') }}">免責事項</a>
+      <a href="{{ u('/privacy/') }}">プライバシーポリシー</a>
+      <a href="{{ u('/changelog/') }}">更新履歴</a>
+    </nav>
+    <p class="foot-note">当サイトは情報提供を目的としており、特定の金融商品の売買を勧誘・推奨するものではありません。投資には元本割れのリスクがあります。最終的な判断はご自身の責任で、公式情報をご確認のうえ行ってください。当サイトの一部にはアフィリエイト広告（PR）が含まれます。</p>
+    <p class="foot-copy">&copy; {{ year }} {{ site.name }}</p>
+  </div>
+</footer>
+{% block scripts %}{% endblock %}
+</body>
+</html>

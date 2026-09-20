@@ -1,0 +1,26 @@
+# アフィリエイト提携先。ASPで提携承認を受けたら affiliate_url にURLを貼るだけで、
+# 全記事のCTAとリンク（[テキスト](aff:sbi) 形式）が自動で差し替わります。
+# affiliate_url が空のままなら、CTAは表示されず、リンクは公式サイトへの通常リンクになります。
+# 表示する紹介文は事実だけにし、報酬額・還元率など変わりやすい数値はここに書かないこと。
+partners:
+  sbi:
+    name: SBI証券
+    official_url: https://www.sbisec.co.jp/
+    affiliate_url: ""
+    asp: ""
+    blurb: ネット証券。新NISA（つみたて投資枠・成長投資枠）に対応しています。
+    cta_text: SBI証券の公式サイトで詳細を見る
+  rakuten:
+    name: 楽天証券
+    official_url: https://www.rakuten-sec.co.jp/
+    affiliate_url: ""
+    asp: ""
+    blurb: ネット証券。新NISA（つみたて投資枠・成長投資枠）に対応しています。
+    cta_text: 楽天証券の公式サイトで詳細を見る
+  monex:
+    name: マネックス証券
+    official_url: https://www.monex.co.jp/
+    affiliate_url: ""
+    asp: ""
+    blurb: ネット証券。新NISA（つみたて投資枠・成長投資枠）に対応しています。
+    cta_text: マネックス証券の公式サイトで詳細を見る

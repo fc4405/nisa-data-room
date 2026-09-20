@@ -1,0 +1,78 @@
+# サイト全体の設定。★印は公開前に必ず自分の値へ変更してください。
+site:
+  name: NISAデータ室
+  tagline: 新NISAを、一次情報と数字で確かめる
+  description: 新NISAの制度・証券口座選び・積立の考え方を、金融庁などの一次情報と自動更新データ、無料シミュレーターで整理するサイトです。
+  # ★ GitHub Pagesの場合: https://<ユーザー名>.github.io/<リポジトリ名>  独自ドメインならそのURL
+  base_url: "https://YOUR-USER.github.io/nisa-data-room"
+  language: ja
+  operator_name: "★運営者名（ハンドルネーム可）"
+  operator_profile: "★運営者のプロフィール（投資経験・運営の目的など。実体験を書くほど信頼性が上がります）"
+  contact_email: ""            # ★公開してよい連絡先。空ならお問い合わせ欄は非表示
+  ga_measurement_id: ""        # 任意: GA4の測定ID (G-XXXXXXX)
+  google_site_verification: ""  # 任意: Search Consoleの「HTMLタグ」確認用 content 値
+  adsense_client: ""           # 任意: AdSenseのクライアントID (ca-pub-...)。審査通過後に設定
+
+generation:
+  # Claude API（GitHub Secretsの ANTHROPIC_API_KEY を使用）
+  model: claude-sonnet-4-5
+  max_tokens: 6000
+  articles_per_run: 1
+  min_chars: 1500              # 本文の最低文字数（生成時の目標は2,500字以上）
+  max_similarity: 0.45         # 既存記事との類似度がこれを超えたら不採用
+  verify_with_llm: true        # 生成後にファクトチェック用の2回目のLLM審査を行う
+  publish_mode: auto           # auto=品質ゲート通過分を自動公開 / draft=下書きのみ保存
+
+quality:
+  banned_patterns:
+    - "絶対(に)?(儲|もう|増|上が|下が|勝)"
+    - "必ず(儲|もう|増|上が|勝|得)"
+    - "元本保証"
+    - "確実に(儲|もう|増|上が|利益)"
+    - "誰でも(簡単に)?(稼|儲)"
+    - "損(を)?しない"
+    - "リスク(は)?(ゼロ|なし|無し)"
+    - "100%(儲|勝|安全|増)"
+    - "今すぐ買(え|うべき)"
+    - "この銘柄(を|は)(買|おすすめ)"
+  allowed_source_domains:
+    - fsa.go.jp
+    - nisa.go.jp
+    - mof.go.jp
+    - nta.go.jp
+    - boj.or.jp
+    - stat.go.jp
+    - e-stat.go.jp
+    - soumu.go.jp
+    - mhlw.go.jp
+    - jpx.co.jp
+    - toushin.or.jp
+    - jsda.or.jp
+    - japan-post.jp
+    - fred.stlouisfed.org
+    - sbisec.co.jp
+    - rakuten-sec.co.jp
+    - monex.co.jp
+    - kabu.com
+    - matsui.co.jp
+    - smbcnikko.co.jp
+    - nomura.co.jp
+    - daiwa.jp
+    - morningstar.co.jp
+    - wam.go.jp
+    - go.jp
+
+# 自動取得する市場データ（FRED = セントルイス連邦準備銀行の公開データ）
+market:
+  series:
+    - {id: SP500, name: "S&P 500", unit: "pt"}
+    - {id: NASDAQCOM, name: "NASDAQ総合", unit: "pt"}
+    - {id: NIKKEI225, name: "日経平均株価", unit: "円"}
+    - {id: DEXJPUS, name: "米ドル/円", unit: "円"}
+  keep_rows: 520
+
+categories:
+  - {slug: seido, name: 制度の基本, desc: 新NISAのルールと仕組み}
+  - {slug: kouza, name: 証券口座の選び方, desc: 口座・クレカ積立・ポイントの比較軸}
+  - {slug: tsumitate, name: 積立と数字, desc: シミュレーションとコストの影響}
+  - {slug: market, name: マーケットデータ, desc: 自動更新の市場データと読み方}

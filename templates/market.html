@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block main %}
+<div class="wrap page">
+  <h1>マーケットデータ<small>{% if market_asof %}（{{ market_asof }}時点）{% endif %}</small></h1>
+  <p class="lead">主要な株価指数と為替を、公開データから自動で取得して毎日更新しています。売買のタイミングを示すものではありません。長期の積立では、短期の値動きより「続けられる金額」と「コスト」が重要になることが多いため、傾向をつかむ目的でご覧ください。</p>
+  {{ market_table|safe }}
+  {% for m in market %}
+  <section class="mkt">
+    <h2>{{ m.name }}</h2>
+    {% if m.stats %}
+    <p class="mkt-now"><strong>{{ '{:,.2f}'.format(m.stats.last) }}</strong> {{ m.unit }} <span>（{{ m.stats.date }}）</span></p>
+    <figure class="chart-fig">{{ m.svg|safe }}</figure>
+    {% else %}<p class="table-note">データ取得待ちです。</p>{% endif %}
+  </section>
+  {% endfor %}
+  <p class="table-note">データ出典: Federal Reserve Bank of St. Louis「FRED」。各系列の著作権・権利は各提供元（S&amp;P Dow Jones Indices、Nasdaq、日本経済新聞社、Board of Governors of the Federal Reserve System 等）に帰属します。取得の遅れや欠損により、実際の市場と異なる場合があります。</p>
+</div>
+{% endblock %}

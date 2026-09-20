@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block main %}
+<div class="wrap page">
+  <h1>{{ heading }}</h1>
+  {% if current %}<p class="lead">{{ current.desc }}</p>{% endif %}
+  <p class="chips">
+    <a class="chip{% if not current %} on{% endif %}" href="{{ u('/articles/') }}">すべて</a>
+    {% for c in cats %}<a class="chip{% if current and current.slug == c.slug %} on{% endif %}" href="{{ u('/category/' ~ c.slug ~ '/') }}">{{ c.name }}</a>{% endfor %}
+  </p>
+  {% if articles %}
+  <ul class="cards">{% for r in articles %}
+    <li class="card"><a href="{{ u(r.url) }}"><span class="tag">{{ r.cat_name }}</span><strong>{{ r.title }}</strong><span class="card-desc">{{ r.description }}</span><span class="card-date">{{ r.updated|jp_date }}更新</span></a></li>
+  {% endfor %}</ul>
+  {% else %}<p>このカテゴリの記事は準備中です。</p>{% endif %}
+</div>
+{% endblock %}

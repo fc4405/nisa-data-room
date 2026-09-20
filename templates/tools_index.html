@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block main %}
+<div class="wrap page">
+  <h1>無料シミュレーター</h1>
+  <p class="lead">入力した数値はブラウザ内でのみ計算され、送信・保存されません。結果は前提を置いた計算であり、将来の運用成果を保証するものではありません。</p>
+  <ul class="cards">{% for t in tools %}
+    <li class="card"><a href="{{ u('/tools/' ~ t.key ~ '/') }}"><span class="tag">ツール</span><strong>{{ t.title }}</strong><span class="card-desc">{{ t.desc }}</span></a></li>
+  {% endfor %}</ul>
+</div>
+{% endblock %}

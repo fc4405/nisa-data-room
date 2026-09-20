@@ -1,0 +1,78 @@
+name: daily-publish
+
+# 毎朝6:00(JST)に、市場データ更新 →（月・水・金のみ）記事を自動生成 → 品質チェック → サイト公開
+on:
+  schedule:
+    - cron: "0 21 * * *"      # 21:00 UTC = 翌朝 06:00 JST
+  workflow_dispatch:
+    inputs:
+      generate:
+        description: "記事を生成する（手動実行時）"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: site
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      SITE_BASE_URL: ${{ vars.SITE_BASE_URL || format('https://{0}.github.io/{1}', github.repository_owner, github.event.repository.name) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install Jinja2 Markdown PyYAML
+
+      - name: 市場データを更新
+        run: python scripts/fetch_market.py
+
+      - name: 記事を自動生成（月・水・金 / 手動実行時）
+        if: env.ANTHROPIC_API_KEY != ''
+        run: |
+          DOW=$(TZ=Asia/Tokyo date +%u)
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.generate }}" = "true" ]; then
+            python scripts/generate_article.py
+          elif [ "${{ github.event_name }}" = "schedule" ] && { [ "$DOW" = "1" ] || [ "$DOW" = "3" ] || [ "$DOW" = "5" ]; }; then
+            python scripts/generate_article.py
+          else
+            echo "今日は記事生成の対象外です（曜日=$DOW）"
+          fi
+
+      - name: テストと品質ゲート
+        run: |
+          python -m unittest discover -s tests
+          python scripts/quality_gate.py
+
+      - name: ビルド（失敗したら今回生成した分を巻き戻して再ビルド）
+        run: |
+          python scripts/build.py || {
+            echo "::warning::ビルドに失敗したため、今回の自動生成分を破棄します"
+            git checkout -- content data
+            git clean -fd content
+            python scripts/build.py
+          }
+
+      - name: 変更をコミット
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content data reports
+          git diff --cached --quiet || { git commit -m "auto: daily update $(TZ=Asia/Tokyo date +%F)"; git push; }
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - id: deployment
+        uses: actions/deploy-pages@v4

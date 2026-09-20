@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block main %}
+<div class="wrap layout">
+<article class="article">
+  <nav class="crumbs" aria-label="パンくず"><a href="{{ u('/') }}">ホーム</a> / <a href="{{ u('/category/' ~ a.category ~ '/') }}">{{ a.cat_name }}</a></nav>
+  <h1>{{ a.title }}</h1>
+  <p class="meta"><span>公開 <time datetime="{{ a.date.isoformat() }}">{{ a.date|jp_date }}</time></span>
+    {% if a.updated != a.date %}<span>更新 <time datetime="{{ a.updated.isoformat() }}">{{ a.updated|jp_date }}</time></span>{% endif %}
+    <span>読了目安 約{{ a.minutes }}分</span></p>
+  {% if a.has_aff %}<p class="pr-notice"><strong>PR</strong> この記事にはアフィリエイト広告が含まれます。掲載順や評価は報酬の有無で変えていません（<a href="{{ u('/ad-policy/') }}">広告について</a>）。</p>{% endif %}
+  {% if a.toc|length >= 3 %}
+  <details class="toc"><summary>目次（{{ a.toc|length }}項目）</summary><ol>{% for t in a.toc %}<li><a href="#{{ t.id }}">{{ t.name }}</a></li>{% endfor %}</ol></details>
+  {% endif %}
+  <div class="prose">{{ a.html|safe }}</div>
+
+  {% if a.sources %}
+  <section class="sources"><h2 id="sources">出典・参考</h2><ul>
+  {% for s in a.sources %}<li><a href="{{ s.url }}" rel="noopener">{{ s.title }}</a></li>{% endfor %}
+  </ul></section>
+  {% endif %}
+  <aside class="howmade"><p><strong>この記事の作り方</strong> 上記の一次情報と、サイト内で自動計算した数値をもとに、AIの支援を受けて作成しています。公開前に自動の品質チェック（誇大表現・出典・重複の検査）を通しています。詳しくは<a href="{{ u('/editorial-policy/') }}">編集方針</a>をご覧ください。誤りを見つけた場合は<a href="{{ u('/about/') }}">運営者情報</a>の連絡先からお知らせください。</p></aside>
+  <aside class="disclaimer"><p>本記事は一般的な情報提供であり、投資勧誘・個別の助言ではありません。制度や条件は変更されることがあるため、実際の手続き前に必ず金融庁・各金融機関の公式情報をご確認ください。</p></aside>
+
+  {% if related %}
+  <section class="related"><h2>あわせて読みたい</h2>
+  <ul class="cards">{% for r in related %}
+    <li class="card"><a href="{{ u(r.url) }}"><span class="tag">{{ r.cat_name }}</span><strong>{{ r.title }}</strong><span class="card-desc">{{ r.description }}</span></a></li>
+  {% endfor %}</ul></section>
+  {% endif %}
+</article>
+</div>
+{% endblock %}

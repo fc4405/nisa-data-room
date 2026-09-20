@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block main %}
+<div class="wrap page narrow">
+  <h1>更新履歴</h1>
+  <p class="lead">記事の公開・更新とデータ更新の履歴です（自動生成）。</p>
+  <ul class="log">{% for l in log %}<li><time datetime="{{ l.date.isoformat() }}">{{ l.date|jp_date }}</time> <a href="{{ u(l.url) }}">{{ l.text }}</a></li>{% endfor %}</ul>
+</div>
+{% endblock %}

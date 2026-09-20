@@ -1,0 +1,9 @@
+<form class="calc" data-tool="frame-planner" novalidate>
+  <div class="grid2">
+    <label>毎月の投資額（円）<input type="number" name="monthly" value="50000" min="0" step="1000" inputmode="numeric"></label>
+    <label>ボーナス月の追加投資（円／年2回）<input type="number" name="bonus" value="0" min="0" step="10000" inputmode="numeric"></label>
+    <label>すでに投資済みの額（簿価・円）<input type="number" name="done" value="0" min="0" step="10000" inputmode="numeric"></label>
+  </div>
+  <p class="hint">生涯投資枠1,800万円（うち成長投資枠は1,200万円まで）と、年間360万円（つみたて120万円＋成長240万円）の上限にあてはめて計算します。売却による枠の再利用と、投資済み額の内訳（つみたて/成長）は考慮しない簡易計算です。</p>
+</form>
+<section class="result" aria-live="polite" data-result="frame-planner"></section>

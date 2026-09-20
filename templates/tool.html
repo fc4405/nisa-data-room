@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block main %}
+<div class="wrap page narrow">
+  <nav class="crumbs" aria-label="パンくず"><a href="{{ u('/') }}">ホーム</a> / <a href="{{ u('/tools/') }}">シミュレーター</a></nav>
+  <h1>{{ t.title }}</h1>
+  <p class="lead">{{ t.desc }}</p>
+  {% include "tools/" ~ t.key ~ ".html" %}
+  <aside class="disclaimer"><p>計算は「毎月末に積立・年利は月複利」という単純な前提に基づく概算です。税金・為替・手数料・相場変動は考慮していません。将来の成果を予測・保証するものではなく、投資判断の助言でもありません。</p></aside>
+</div>
+{% endblock %}
+{% block scripts %}<script src="{{ u('/static/js/tools.js') }}"></script>{% endblock %}

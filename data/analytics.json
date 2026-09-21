@@ -1,10 +1,17 @@
 {
-  "date": "2026-09-20",
+  "date": "2026-09-21",
   "inventory": {
-    "count": 9,
+    "count": 24,
     "stale": [],
-    "orphans": [],
-    "chars": 15702
+    "orphans": [
+      "tsumitate-taishou-kakudai-2027",
+      "tokutei-loss-kurikoshi-shinkoku",
+      "nisa-nenkan-360-breakdown",
+      "nisa-muki-gen-permanent",
+      "nisa-kouza-kaisetsu-nenrei-hitori",
+      "nisa-kouza-kaisetsu-go-checklist"
+    ],
+    "chars": 45652
   },
   "gsc": null,
   "generation": {

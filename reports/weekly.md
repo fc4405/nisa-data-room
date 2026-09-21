@@ -1,9 +1,17 @@
-# 週次レポート 2026-09-20
+# 週次レポート 2026-09-21
 
 ## サマリー
-- 公開記事: 9本（合計 約15,702字）
+- 公開記事: 24本（合計 約45,652字）
 - 半年以上更新していない記事: 0本
-- 内部リンクが1本も向いていない記事: 0本
+- 内部リンクが1本も向いていない記事: 6本
+
+### 内部リンクの孤立記事（他の記事から1本もリンクされていない）
+- tsumitate-taishou-kakudai-2027
+- tokutei-loss-kurikoshi-shinkoku
+- nisa-nenkan-360-breakdown
+- nisa-muki-gen-permanent
+- nisa-kouza-kaisetsu-nenrei-hitori
+- nisa-kouza-kaisetsu-go-checklist
 
 ## 事実データの鮮度（data/facts.yaml）
 - すべて90日以内に確認済み

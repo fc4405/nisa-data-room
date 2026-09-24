@@ -1,26 +1,21 @@
-"""市場データ: Stooqの日足CSV取得・統計・SVGチャート生成。
-（旧FRED版は GitHub Actions のIPからだと応答がなくタイムアウトし続けたため、
- CSVダウンロードが用途として公開されている Stooq に切り替えた）"""
+"""市場データ: FRED公式APIでのデータ取得・統計・SVGチャート生成。
+（グラフ表示用の内部URL fredgraph.csv や、Stooqの一般公開CSVは
+ GitHub ActionsのIPからだとブロック/タイムアウトしたため、
+ APIキーで認証する公式の series/observations エンドポイントに切り替えた）"""
 from __future__ import annotations
 
 import csv
 import datetime as dt
 import io
+import json
 import os
+import urllib.parse
 import urllib.request
 from pathlib import Path
 
 from common import DATA_DIR, load_config
 
-# 内部の系列ID（旧FREDのID。サイト側のCSVファイル名・テンプレートで使用中のため維持）
-# → Stooqのティッカーシンボルへの対応表
-STOOQ_SYMBOLS = {
-    "SP500": "^spx",
-    "NASDAQCOM": "^ndq",
-    "NIKKEI225": "^nkx",
-    "DEXJPUS": "usdjpy",
-}
-STOOQ_URL = "https://stooq.com/q/d/l/?s={symbol}&d1={start}&d2={end}&i=d"
+FRED_API_URL = "https://api.stlouisfed.org/fred/series/observations"
 
 
 def market_dir() -> Path:
@@ -50,33 +45,6 @@ def parse_fred_csv(text: str, series_id: str) -> list[tuple[str, float]]:
     return rows
 
 
-def parse_stooq_csv(text: str) -> list[tuple[str, float]]:
-    """Stooqの日足CSV（Date,Open,High,Low,Close,Volume）から終値を [(日付, 値)] にする。"""
-    stripped = text.strip()
-    if not stripped or stripped.startswith("<"):
-        raise ValueError("Stooqから想定外の応答（HTML等）")
-    rows: list[tuple[str, float]] = []
-    reader = csv.reader(io.StringIO(stripped))
-    header = next(reader, None)
-    if not header or len(header) < 2:
-        raise ValueError("CSVヘッダーが不正です")
-    lower = [h.strip().lower() for h in header]
-    if "date" not in lower or "close" not in lower:
-        raise ValueError(f"想定外のCSV形式です: {header}")
-    i_date, i_close = lower.index("date"), lower.index("close")
-    for r in reader:
-        if len(r) <= max(i_date, i_close):
-            continue
-        d, v = r[i_date].strip(), r[i_close].strip()
-        if not v or v.upper() == "N/D":
-            continue
-        try:
-            dt.date.fromisoformat(d)
-            rows.append((d, float(v)))
-        except ValueError:
-            continue
-    return rows
-
 
 def load_series(series_id: str) -> list[tuple[str, float]]:
     p = market_dir() / f"{series_id}.csv"
@@ -95,30 +63,49 @@ def save_series(series_id: str, rows: list[tuple[str, float]], keep: int) -> Non
         w.writerows(merged)
 
 
+def parse_fred_json(text: str) -> list[tuple[str, float]]:
+    """FRED公式APIのJSON応答（observations配列。欠損値は "."）を [(日付, 値)] にする。"""
+    try:
+        data = json.loads(text)
+    except json.JSONDecodeError as e:
+        raise ValueError(f"FRED APIの応答がJSONではありません: {e}") from e
+    if "error_message" in data:
+        raise ValueError(f"FRED APIエラー: {data['error_message']}")
+    rows: list[tuple[str, float]] = []
+    for obs in data.get("observations", []):
+        d, v = obs.get("date"), obs.get("value")
+        if not v or v == ".":
+            continue
+        try:
+            dt.date.fromisoformat(d)
+            rows.append((d, float(v)))
+        except (TypeError, ValueError):
+            continue
+    return rows
+
+
 def fetch_series(series_id: str, days: int = 800, timeout: int = 20) -> list[tuple[str, float]]:
-    """Stooqの日足CSVを取得する（実ブラウザに近いヘッダーで、失敗時は最大3回リトライ）。"""
-    symbol = STOOQ_SYMBOLS.get(series_id)
-    if not symbol:
-        raise ValueError(f"Stooq未対応の系列IDです: {series_id}")
-    start = (dt.date.today() - dt.timedelta(days=days)).strftime("%Y%m%d")
-    end = dt.date.today().strftime("%Y%m%d")
-    url = STOOQ_URL.format(symbol=symbol, start=start, end=end)
-    headers = {
-        "User-Agent": (
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-            "(KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
-        ),
-        "Accept": "text/csv,text/plain,*/*",
-        "Accept-Language": "ja,en-US;q=0.8,en;q=0.6",
-        "Referer": "https://stooq.com/",
-        "Connection": "close",
-    }
+    """FRED公式API（series/observations）からデータを取得する。失敗時は最大3回リトライ。"""
+    api_key = os.environ.get("FRED_API_KEY")
+    if not api_key:
+        raise ValueError("FRED_API_KEYが設定されていません")
+    start = (dt.date.today() - dt.timedelta(days=days)).isoformat()
+    query = urllib.parse.urlencode(
+        {
+            "series_id": series_id,
+            "api_key": api_key,
+            "file_type": "json",
+            "observation_start": start,
+        }
+    )
+    url = f"{FRED_API_URL}?{query}"
+    headers = {"User-Agent": "nisa-data-room/1.0 (+static blog data refresh)"}
     last_err: Exception | None = None
     for attempt in range(3):
         try:
             req = urllib.request.Request(url, headers=headers)
             with urllib.request.urlopen(req, timeout=timeout) as r:
-                return parse_stooq_csv(r.read().decode("utf-8"))
+                return parse_fred_json(r.read().decode("utf-8"))
         except Exception as e:  # noqa: BLE001 - リトライのため一旦捕捉
             last_err = e
     raise last_err  # type: ignore[misc]

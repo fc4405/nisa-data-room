@@ -104,6 +104,45 @@ class MarketTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             market.parse_fred_csv("", "X")
 
+    def test_chg_1d_uses_previous_row(self):
+        rows = market.parse_fred_csv(self.CSV, "SP500")
+        s = market.stats(rows)
+        # 直前の行(2026-04-01, 120)からの変化率
+        self.assertAlmostEqual(s["chg_1d"], (90 / 120 - 1) * 100)
+
+    def test_resample_monthly_keeps_last_value_per_month(self):
+        daily = [("2026-01-02", 100.0), ("2026-01-20", 105.0), ("2026-02-01", 108.0), ("2026-02-15", 111.0)]
+        monthly = market.resample_monthly(daily)
+        self.assertEqual(monthly, [("2026-01-01", 105.0), ("2026-02-01", 111.0)])
+
+    def test_backtest_dca_js(self):
+        """積立の疑似体験ツール（market-experience）のJS計算を、手計算と突き合わせる。"""
+        js = ROOT / "static" / "js" / "tools.js"
+        # 3か月分、価格 100 -> 50 -> 100 の単純な系列で、毎月1万円積み立てたケース
+        rows = [["2020-01", 100], ["2020-02", 50], ["2020-03", 100]]
+        code = ("const t=require(%r);console.log(JSON.stringify(t.backtestDCA(%s,'2020-01',10000)))"
+                % (str(js), json.dumps(rows)))
+        r = subprocess.run(["node", "-e", code], capture_output=True, text=True)
+        if r.returncode != 0:
+            self.skipTest("node が使えません: " + r.stderr[:200])
+        out = json.loads(r.stdout)
+        # 口数: 1月100円で100口 + 2月50円で200口 + 3月100円で100口 = 400口。評価額 = 400口 x 100円 = 40,000円
+        self.assertAlmostEqual(out["principal"], 30000)
+        self.assertAlmostEqual(out["value"], 40000)
+        self.assertAlmostEqual(out["gain"], 10000)
+        self.assertEqual(out["months"], 3)
+        # 2月末時点: 口数100+200=300口 x 50円 = 15,000円、元本は20,000円 -> 含み損 -25%
+        self.assertAlmostEqual(out["worst"], -0.25)
+        self.assertEqual(out["worstYm"], "2020-02")
+
+    def test_backtest_dca_unknown_start_returns_none(self):
+        js = ROOT / "static" / "js" / "tools.js"
+        code = "const t=require(%r);console.log(JSON.stringify(t.backtestDCA([['2020-01',100]],'1999-01',10000)))" % str(js)
+        r = subprocess.run(["node", "-e", code], capture_output=True, text=True)
+        if r.returncode != 0:
+            self.skipTest("node が使えません: " + r.stderr[:200])
+        self.assertEqual(json.loads(r.stdout), None)
+
 
 class GateTests(unittest.TestCase):
     def check(self, m=None, body=None, others=()):

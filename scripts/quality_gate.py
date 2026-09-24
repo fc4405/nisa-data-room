@@ -23,7 +23,7 @@ SLUG_RE = re.compile(r"^[a-z0-9][a-z0-9\-]{2,80}$")
 SC_RE = re.compile(r"^\{\{(\w+):([\w\-.]+)\}\}[ \t]*$", re.M)
 LINK_RE = re.compile(r"\]\(([^)\s]+)\)")
 ASP_DOMAINS = ("a8.net", "px.a8.net", "afi-b.com", "moshimo.com", "accesstrade.net", "valuecommerce.com", "amzn.to")
-TOOL_KEYS = {"nisa-simulator", "fee-impact", "frame-planner", "tax-merit"}
+TOOL_KEYS = {"nisa-simulator", "fee-impact", "frame-planner", "tax-merit", "start-diagnosis", "market-experience"}
 # 「必ず儲かるわけではありません」のように、直後で打ち消している表現は誇大表現とみなさない
 NEGATED = re.compile(r"^.{0,14}?(では|わけでは|とは|という意味では|ことは)(ありません|ない|限りません|言えません)")
 

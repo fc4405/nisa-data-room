@@ -3,7 +3,7 @@
 <section class="hero"><div class="wrap">
   <h1>{{ site.tagline }}</h1>
   <p class="lead">{{ site.description }}</p>
-  <p class="hero-actions"><a class="btn" href="{{ u('/guide/') }}">はじめての方へ｜学ぶ順番ガイド</a> <a class="btn btn-ghost" href="{{ u('/tools/nisa-simulator/') }}">積立シミュレーター</a> <a class="btn btn-ghost" href="{{ u('/articles/') }}">記事を読む</a></p>
+  <p class="hero-actions"><a class="btn" href="{{ u('/tools/start-diagnosis/') }}">はじめかた診断｜30秒で自分に合う始め方がわかる</a> <a class="btn btn-ghost" href="{{ u('/guide/') }}">学ぶ順番ガイド</a> <a class="btn btn-ghost" href="{{ u('/tools/nisa-simulator/') }}">積立シミュレーター</a></p>
 </div></section>
 
 <div class="wrap page">
@@ -24,8 +24,9 @@
 
   <section>
     <h2 class="sec">マーケットデータ<small>{% if market_asof %}（{{ market_asof }}時点・自動更新）{% endif %}</small></h2>
+    {% if market_headline %}<p class="mkt-headline">{{ market_headline }}</p>{% endif %}
     {{ market_table|safe }}
-    <p class="more"><a href="{{ u('/market/') }}">チャートを見る &rarr;</a></p>
+    <p class="more"><a href="{{ u('/market/') }}">チャートを見る &rarr;</a> ／ <a href="{{ u('/tools/market-experience/') }}">過去データで積立を疑似体験する &rarr;</a></p>
   </section>
 
   <section class="trust">

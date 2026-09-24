@@ -25,7 +25,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import shortcodes  # noqa: E402
 from common import ROOT, load_affiliates, load_articles, load_config, split_front_matter, today_jst  # noqa: E402
-from market import all_market  # noqa: E402
+from market import all_market, load_monthly_series  # noqa: E402
 
 DIST = ROOT / "dist"
 SC_LINE = re.compile(r"^\{\{(\w+):([\w\-.]+)\}\}[ \t]*$", re.M)
@@ -41,6 +41,12 @@ TOOLS = [
      "desc": "積立の結果として、課税口座なら引かれる税金（20.315%）と、NISAで省ける金額の目安を計算します。"},
     {"key": "frame-planner", "title": "新NISA枠の使い切りプランナー",
      "desc": "毎月・ボーナス月の投資額から、年間の枠の使い方と1,800万円に届くまでの年数を確認します。"},
+    {"key": "start-diagnosis", "title": "はじめかた診断｜3つの質問でわかる、あなたに合う始め方",
+     "desc": "投資経験・毎月の予算・目的の3つの質問に答えると、無理のない積立額の目安と、次に読む記事・使うツールの順番をまとめて提案します。",
+     "disclaimer": "これは一般的な考え方の整理であり、投資の助言ではありません。金額や配分は、ご自身の家計状況に合わせて調整してください。"},
+    {"key": "market-experience", "title": "積立の疑似体験シミュレーター｜過去の指数データで確認",
+     "desc": "S&P500・NASDAQ総合・日経平均の実際の指数データをもとに、「もし何年前から積み立てていたら、今いくらか」を疑似的に確認できます。",
+     "disclaimer": "実際の指数データにもとづく疑似体験です。信託報酬・税金・為替（円換算）・分配金・売買コストは考慮していません。将来の運用成果を予測・保証するものではなく、特定の商品を推奨するものでもありません。"},
 ]
 
 
@@ -83,6 +89,15 @@ class Site:
 
     def render(self, tpl: str, rel: str, **ctx) -> None:
         self.write(rel, self.env.get_template(tpl).render(**ctx))
+
+    # --- 積立の疑似体験ツール用データ ---
+    def _experience_json(self) -> str:
+        """月次の長期データを、体験ツールのJS用にJSONへ（データが無い系列は空配列のまま渡す）。"""
+        out: dict = {}
+        for s in self.cfg["market"]["series"]:
+            rows = load_monthly_series(s["id"])
+            out[s["id"]] = {"name": s["name"], "unit": s["unit"], "rows": [[d[:7], v] for d, v in rows]}
+        return json.dumps(out, ensure_ascii=False)
 
     # --- アフィリエイト ---
     def aff_link(self, pid: str) -> tuple[str, bool]:
@@ -246,18 +261,23 @@ class Site:
         }
         self.render("index.html", "index.html", articles=articles[:6], market=market, market_asof=market_asof,
                     title=None, description=self.cfg["site"]["description"], canonical=self.abs("/"),
-                    market_table=shortcodes.market_table(), jsonld=json.dumps(home_ld, ensure_ascii=False))
+                    market_table=shortcodes.market_table(), market_headline=shortcodes.market_headline(),
+                    jsonld=json.dumps(home_ld, ensure_ascii=False))
 
         # ツール
         self.render("tools_index.html", "tools/index.html", title="無料シミュレーター一覧",
                     description="新NISAの積立・コスト・枠の使い切りを計算できる無料ツール。", canonical=self.abs("/tools/"))
+        experience_json = self._experience_json()
         for t in TOOLS:
+            extra = {"experience_json": experience_json} if t["key"] == "market-experience" else {}
             self.render("tool.html", f"tools/{t['key']}/index.html", t=t, title=t["title"],
-                        description=t["desc"], canonical=self.abs(f"/tools/{t['key']}/"))
+                        description=t["desc"], canonical=self.abs(f"/tools/{t['key']}/"), **extra)
 
         # マーケット
+        market_headline = shortcodes.market_headline()
         self.render("market.html", "market/index.html", market=market, market_asof=market_asof,
-                    market_table=shortcodes.market_table(), title="マーケットデータ（自動更新）",
+                    market_table=shortcodes.market_table(), market_headline=market_headline,
+                    title="マーケットデータ（自動更新）",
                     description="主要株価指数と為替の最新値・騰落率・推移チャートを毎日自動更新。",
                     canonical=self.abs("/market/"))
 

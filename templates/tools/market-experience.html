@@ -1,0 +1,18 @@
+<script>window.MARKET_EXPERIENCE_DATA = {{ experience_json|safe }};</script>
+<form class="calc" data-tool="market-experience" novalidate>
+  <div class="grid2">
+    <label>対象の指数
+      <select name="index">
+        <option value="SP500">S&amp;P 500（米国株）</option>
+        <option value="NASDAQCOM">NASDAQ総合（米国株）</option>
+        <option value="NIKKEI225">日経平均株価（日本株）</option>
+      </select>
+    </label>
+    <label>いつから積み立てたと仮定するか
+      <select name="start"></select>
+    </label>
+    <label>毎月の積立額（円）<input type="number" name="monthly" value="30000" min="1000" step="1000" inputmode="numeric"></label>
+  </div>
+  <p class="hint">公開されている指数データにもとづく疑似体験です。信託報酬・税金・為替（円換算）・分配金・売買コストは考慮していません。対象の指数に連動する特定の商品を紹介・推奨するものではありません。</p>
+</form>
+<section class="result" aria-live="polite" data-result="market-experience"></section>

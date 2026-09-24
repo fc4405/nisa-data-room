@@ -75,6 +75,7 @@ def stats(rows: list[tuple[str, float]]) -> dict | None:
         return None
     last_d, last_v = rows[-1]
     last_date = dt.date.fromisoformat(last_d)
+    prev_v = rows[-2][1] if len(rows) >= 2 else None
 
     def back(days: int):
         target = last_date - dt.timedelta(days=days)
@@ -87,6 +88,7 @@ def stats(rows: list[tuple[str, float]]) -> dict | None:
     return {
         "date": last_d,
         "last": last_v,
+        "chg_1d": _pct(last_v, prev_v) if prev_v else None,
         "chg_1w": _pct(last_v, back(7)) if back(7) else None,
         "chg_1m": _pct(last_v, back(30)) if back(30) else None,
         "chg_3m": _pct(last_v, back(91)) if back(91) else None,
@@ -130,6 +132,36 @@ def svg_line_chart(rows: list[tuple[str, float]], title: str, w: int = 640, h: i
         f'<text x="{L}" y="{h-6}" class="c-txt">{first[0]}</text>'
         f'<text x="{w-R}" y="{h-6}" class="c-txt" text-anchor="end">{last[0]}</text></svg>'
     )
+
+
+def monthly_path(series_id: str) -> Path:
+    return market_dir() / f"{series_id}_monthly.csv"
+
+
+def load_monthly_series(series_id: str) -> list[tuple[str, float]]:
+    """積立の疑似体験（過去データ）用の月次データ。"""
+    p = monthly_path(series_id)
+    if not p.exists():
+        return []
+    return parse_fred_csv(p.read_text(encoding="utf-8"), series_id)
+
+
+def save_monthly_series(series_id: str, rows: list[tuple[str, float]]) -> None:
+    d = market_dir()
+    d.mkdir(parents=True, exist_ok=True)
+    merged = sorted(dict(rows).items())
+    with open(monthly_path(series_id), "w", encoding="utf-8", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(["DATE", series_id])
+        w.writerows(merged)
+
+
+def resample_monthly(rows: list[tuple[str, float]]) -> list[tuple[str, float]]:
+    """日次の [(date, value)] を、各月の最後に取得できた値で月次化する（各月1日の日付で表す）。"""
+    by_month: dict[str, float] = {}
+    for d, v in sorted(rows):
+        by_month[d[:7]] = v  # ソート済みなので、同じ月では最後に代入された値が残る
+    return [(f"{ym}-01", v) for ym, v in sorted(by_month.items())]
 
 
 def all_market() -> list[dict]:

@@ -1,0 +1,28 @@
+<form class="calc" data-tool="start-diagnosis" novalidate>
+  <div class="grid2">
+    <label>Q1. 投資の経験は？
+      <select name="experience">
+        <option value="none">まったく初めて</option>
+        <option value="some" selected>NISA以外も含め、少しある</option>
+        <option value="much">経験は十分にある</option>
+      </select>
+    </label>
+    <label>Q2. 毎月、投資に回せる目安は？
+      <select name="budget">
+        <option value="unknown" selected>まだ決めていない</option>
+        <option value="1">1万円くらいまで</option>
+        <option value="3">3万円くらいまで</option>
+        <option value="5">5万円以上</option>
+      </select>
+    </label>
+    <label>Q3. 何のために増やしたい？
+      <select name="goal">
+        <option value="retire">老後の資金</option>
+        <option value="big">将来の大きな支出（教育・住宅など）</option>
+        <option value="undecided" selected>特に決めていない・とりあえず始めたい</option>
+      </select>
+    </label>
+  </div>
+  <p class="hint">3つの質問から、無理のない積立額の目安と、次に読む記事・使うツールの順番をまとめます。個人情報の入力は不要で、送信・保存もされません。</p>
+</form>
+<section class="result" aria-live="polite" data-result="start-diagnosis"></section>

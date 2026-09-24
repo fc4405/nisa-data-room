@@ -86,17 +86,33 @@ def market_table() -> str:
     for m in all_market():
         s = m["stats"]
         if not s:
-            rows.append([m["name"], "取得待ち", "―", "―", "―", "―", "―"])
+            rows.append([m["name"], "取得待ち", "―", "―", "―", "―", "―", "―"])
             continue
         rows.append(
-            [m["name"], f"{s['last']:,.2f}", fmt_pct(s["chg_1w"]), fmt_pct(s["chg_1m"]),
+            [m["name"], f"{s['last']:,.2f}", fmt_pct(s["chg_1d"]), fmt_pct(s["chg_1w"]), fmt_pct(s["chg_1m"]),
              fmt_pct(s["chg_3m"]), fmt_pct(s["chg_1y"]), fmt_pct(s["from_high"])]
         )
     return _table(
-        ["指標", "最新値", "1週間", "1か月", "3か月", "1年", "直近1年高値から"],
+        ["指標", "最新値", "前回比", "1週間", "1か月", "3か月", "1年", "直近1年高値から"],
         rows,
         "主要指標の最新値と騰落率（自動更新）",
     )
+
+
+def market_headline() -> str:
+    """「前回の更新から、総じて上がっているか下がっているか」を一言でまとめる（毎朝の自動更新ベース）。"""
+    vals = [m["stats"]["chg_1d"] for m in all_market() if m["stats"] and m["stats"].get("chg_1d") is not None]
+    if not vals:
+        return ""
+    ups = sum(1 for v in vals if v > 0)
+    downs = sum(1 for v in vals if v < 0)
+    if ups and not downs:
+        return "主要な指標は、前回の更新時点から総じて上昇しています。"
+    if downs and not ups:
+        return "主要な指標は、前回の更新時点から総じて下落しています。"
+    if ups == downs:
+        return "主要な指標は、前回の更新時点から上昇と下落が分かれています。"
+    return "主要な指標は、前回の更新時点からおおむね" + ("上昇" if ups > downs else "下落") + "しています（一部を除く）。"
 
 
 TABLES = {

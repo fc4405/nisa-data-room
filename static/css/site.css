@@ -92,6 +92,13 @@ tbody th{font-weight:600}
 .kv.big{border-color:var(--brand);background:var(--brand-soft)}.kv.big dd{font-size:1.4rem;color:var(--brand)}
 .mkt{margin-top:2em}.mkt h2{margin-top:1em}.mkt-now{margin:0}.mkt-now strong{font-size:1.5rem;font-variant-numeric:tabular-nums}.mkt-now span{color:var(--muted);font-size:.85rem}
 .chart-fig{margin:8px 0;padding:8px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius)}
+.mkt-headline{background:var(--brand-soft);color:var(--ink);padding:10px 14px;border-radius:10px;font-size:.92rem;margin:.6em 0 1.2em}
+.mkt-now .delta{margin-left:10px;font-weight:700;font-variant-numeric:tabular-nums}
+.mkt-now .delta.up{color:var(--brand)}.mkt-now .delta.down{color:var(--accent)}.mkt-now .delta.flat{color:var(--muted);font-weight:400}
+.calc select{font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);min-height:44px}
+.calc select:focus{outline:3px solid var(--brand-soft);border-color:var(--brand)}
+.roadmap{margin:.6em 0 1.2em;padding-left:1.4em;display:flex;flex-direction:column;gap:8px}
+.roadmap li{padding-left:.2em}
 .chart{width:100%;height:auto;display:block}
 .c-line{stroke:var(--chart-line);stroke-width:2;stroke-linejoin:round}.c-area{fill:var(--chart-area)}
 .c-grid{stroke:var(--chart-grid);stroke-width:1}.c-dot{fill:var(--chart-line)}.c-txt{fill:var(--muted);font-size:11px}

@@ -55,14 +55,32 @@ def save_series(series_id: str, rows: list[tuple[str, float]], keep: int) -> Non
         w.writerows(merged)
 
 
-def fetch_series(series_id: str, days: int = 800, timeout: int = 30) -> list[tuple[str, float]]:
+def fetch_series(series_id: str, days: int = 800, timeout: int = 20) -> list[tuple[str, float]]:
+    """FREDのグラフ用CSVエンドポイントを取得する。
+    データセンターIP・非ブラウザUAからのアクセスは応答が返らず
+    タイムアウトすることがあるため、実ブラウザに近いヘッダーで
+    複数回リトライする。"""
     start = (dt.date.today() - dt.timedelta(days=days)).isoformat()
-    req = urllib.request.Request(
-        FRED_URL.format(id=series_id, start=start),
-        headers={"User-Agent": "nisa-data-room/1.0 (+static blog data refresh)"},
-    )
-    with urllib.request.urlopen(req, timeout=timeout) as r:
-        return parse_fred_csv(r.read().decode("utf-8"), series_id)
+    url = FRED_URL.format(id=series_id, start=start)
+    headers = {
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+            "(KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+        ),
+        "Accept": "text/csv,text/plain,*/*",
+        "Accept-Language": "ja,en-US;q=0.8,en;q=0.6",
+        "Referer": "https://fred.stlouisfed.org/",
+        "Connection": "close",
+    }
+    last_err: Exception | None = None
+    for attempt in range(3):
+        try:
+            req = urllib.request.Request(url, headers=headers)
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                return parse_fred_csv(r.read().decode("utf-8"), series_id)
+        except Exception as e:  # noqa: BLE001 - リトライのため一旦捕捉
+            last_err = e
+    raise last_err  # type: ignore[misc]
 
 
 def _pct(a: float, b: float) -> float | None:

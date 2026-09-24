@@ -1,132 +1,325 @@
-# 記事トピックのキュー。上から順に自動で消化されます。未着手が3件未満になると自動補充（--propose）。
-# facts には data/facts.yaml の id を書く。ここで指定した事実だけが記事の根拠になります。
+# 記事トピックのキュー。上から順に自動で消化されます（--propose で自動追加もされます）。
 topics:
-  - id: nisa-tax-merit-20315
-    title_hint: 新NISAの非課税メリットはいくら？20.315%の税金を具体例で確認
-    keyword: 新NISA 非課税 メリット 税金
-    category: seido
-    intent: NISAだと具体的に税金がどれだけ違うのか知りたい
-    outline: [通常の課税口座で税金がかかる仕組み, 利益10万円・100万円の場合の税額の考え方（20.315%の算術のみ）, NISAで非課税になる範囲, 非課税でも残る注意点]
-    facts: [nisa_tax, nisa_loss]
-  - id: nisa-loss-tsuusan-dekinai
-    title_hint: NISAは損益通算できない？損失が出たときのルールを整理
-    keyword: NISA 損益通算 できない 損失
-    category: seido
-    intent: NISAで損した場合に他の利益と相殺できるのか知りたい
-    outline: [損益通算とは, NISAでの損失の扱い, 特定口座との違い, 損失リスクを踏まえた使い分けの考え方]
-    facts: [nisa_loss, nisa_tax]
-  - id: nisa-baikyaku-waku-saikatsuyou
-    title_hint: NISAで売却したら枠はいつ戻る？再利用のルールと注意点
-    keyword: 新NISA 売却 枠 復活 翌年
-    category: seido
-    intent: 売却した後、いつ・どれだけ枠が使えるようになるのか知りたい
-    outline: [枠は簿価で管理される, 売却した簿価分が翌年以降に再利用できる, 同じ年には戻らない点, 資金計画での注意]
-    facts: [nisa_reuse, nisa_book_value, nisa_lifetime]
-  - id: nisa-haitou-uketori-houhou
-    title_hint: NISAで配当金を非課税で受け取るには？受取方法の設定を確認
-    keyword: NISA 配当金 非課税 株式数比例配分方式
-    category: seido
-    intent: 配当を非課税にするために何を設定すればよいか知りたい
-    outline: [NISAで配当が非課税になる仕組み, 株式数比例配分方式とは, 設定の確認手順の考え方, 注意点]
-    facts: [dividend_method, nisa_tax]
-  - id: nisa-kouza-kaisetsu-nenrei-hitori
-    title_hint: 新NISA口座は何歳から？1人1口座のルールと金融機関の変更
-    keyword: 新NISA 何歳から 1人1口座 金融機関 変更
-    category: seido
-    intent: 誰が・何口座開設できるのか、金融機関を変えられるのか知りたい
-    outline: [開設できる人, 1人1口座の意味, 金融機関の変更は年単位, 変更時に気をつける点]
-    facts: [nisa_age, nisa_permanent]
-  - id: nisa-boki-kanri-wakari-yasuku
-    title_hint: 新NISAの簿価管理とは？値上がりしても枠が増えない理由を図解風に解説
-    keyword: 新NISA 簿価 非課税保有限度額 仕組み
-    category: seido
-    intent: 生涯枠1,800万円がどう減る・戻るのか理解したい
-    outline: [簿価と時価の違い, 値上がり・値下がりのときの枠の動き, 売却時の枠の再利用, よくある勘違い]
-    facts: [nisa_book_value, nisa_lifetime, nisa_reuse]
-  - id: nisa-muki-gen-permanent
-    title_hint: 新NISAは無期限で恒久化？長期投資で意識したいポイント
-    keyword: 新NISA 無期限 恒久化 メリット
-    category: seido
-    intent: 期限が無いことで何が変わるのか知りたい
-    outline: [旧制度との違いは書かず現行ルールのみ説明, 期限がない意味, 長く持つときの注意（損失リスク・コスト）, 出口を考える視点]
-    facts: [nisa_permanent, nisa_reuse, nisa_tax]
-  - id: tsumitate-taishou-shohin-toha
-    title_hint: つみたて投資枠の対象商品とは？選ぶときの見方
-    keyword: つみたて投資枠 対象商品 投資信託
-    category: seido
-    intent: つみたて投資枠で何が買えるのか、どう選べばよいか知りたい
-    outline: [対象商品の条件（金融庁への届出）, 成長投資枠との違い, 商品を選ぶときに確認する項目, 特定の商品名は挙げない]
-    facts: [tsumitate_products, nisa_frames]
-  - id: seicho-toushiwaku-ikkatsu-chuui
-    title_hint: 成長投資枠で一括投資するときの注意点｜タイミングと上限の考え方
-    keyword: 成長投資枠 一括投資 注意点
-    category: seido
-    intent: 成長投資枠でまとまった額を投資するときの注意点を知りたい
-    outline: [一括投資ができるのは成長投資枠, 年間240万円・生涯1,200万円の上限, 購入時期を分ける考え方, 損失と損益通算の注意]
-    facts: [growth_lump, nisa_frames, nisa_lifetime, nisa_loss]
-  - id: nisa-nenkan-360-breakdown
-    title_hint: 新NISAの年間360万円の内訳｜つみたて120万円＋成長240万円の使い方
-    keyword: 新NISA 年間360万円 内訳
-    category: seido
-    intent: 年間の枠をどう配分して使えるのか知りたい
-    outline: [年間の枠の内訳, 併用の考え方, 使い切らなくてよい理由, 生涯枠との関係]
-    facts: [nisa_frames, nisa_lifetime]
-  - id: nisa-monthly-amount-how-to-decide
-    title_hint: 新NISAで毎月いくら積み立てる？金額を決める判断の順序
-    keyword: 新NISA 毎月 いくら 積立額 決め方
-    category: tsumitate
-    intent: 自分に合った積立額の決め方を知りたい
-    outline: [生活防衛資金を先に確保, 余裕資金の考え方, シミュレーターで幅を見る, 途中で変更できること]
-    facts: [nisa_frames, nisa_lifetime]
-  - id: nisa-vs-tokutei-kouza
-    title_hint: NISA口座と特定口座の違いを比較｜税金・損益通算・使い分け
-    keyword: NISA 特定口座 違い 比較
-    category: seido
-    intent: NISA口座と課税口座の違いと使い分けを知りたい
-    outline: [税金の違い, 損益通算の違い, 枠の有無, 併用の考え方]
-    facts: [nisa_tax, nisa_loss, nisa_frames]
-  - id: nisa-kouza-kaisetsu-go-checklist
-    title_hint: 新NISA口座を開いたあとにやること｜最初の1か月のチェックリスト
-    keyword: 新NISA 口座開設後 やること 積立設定
-    category: kouza
-    intent: 口座開設後に何をすればよいか知りたい
-    outline: [入金, 買う商品の確認（コスト・中身）, 積立設定, 配当の受取方法確認, 定期的な見直し]
-    facts: [nisa_frames, dividend_method, tsumitate_products]
-  - id: market-nikkei-vs-sp500-reading
-    title_hint: 日経平均とS&P500を並べて見る｜自動更新データの読み方
-    keyword: 日経平均 S&P500 比較 推移
-    category: market
-    intent: 日米の株価指数の動きを比べる見方を知りたい
-    outline: [表の見方（最新値・騰落率・高値からの下落率）, 指数ごとの通貨の違い, 短期の比較で注意する点, 積立との付き合い方]
-    facts: [nisa_frames]
-    needs_market: true
-  - id: market-usdjpy-effect-on-tsumitate
-    title_hint: 為替（ドル円）が円建ての積立評価額に与える影響の見方
-    keyword: ドル円 為替 積立 評価額 影響
-    category: market
-    intent: 為替の動きが円建ての評価額にどう影響するか知りたい
-    outline: [ドル建て資産と円建て評価額, 円高・円安の影響の方向, 為替の予想に頼らない考え方, 表の見方]
-    facts: [nisa_frames]
-    needs_market: true
-  - id: tokutei-loss-kurikoshi-shinkoku
-    title_hint: 特定口座の損失は3年間繰り越せる？確定申告が必要なケースを整理
-    keyword: 株 損失 繰越控除 3年 確定申告 特定口座
-    category: seido
-    intent: 課税口座で損失が出たときの繰越控除と確定申告のルールを知りたい
-    outline: [損益通算と繰越控除の違い, 翌年以後3年間の繰越, 申告が必要な理由（譲渡がなかった年も）, NISA口座との違い]
-    facts: [tokutei_loss, nisa_loss]
-  - id: tsumitate-taishou-kakudai-2027
-    title_hint: 2027年からつみたて投資枠の対象商品はどう変わる？改正内容を整理
-    keyword: つみたて投資枠 対象商品 拡充 2027 改正
-    category: seido
-    intent: 2027年からの対象商品の変更点を知りたい
-    outline: [現行の対象商品の要件, 対象株式指数の追加, 債券中心の投資信託の追加, 定期売却サービスの手数料, 利用者が確認すべきこと]
-    facts: [tsumitate_expansion_2027, tsumitate_requirements, tsumitate_products]
-  - id: nisa-haitou-tax-20315-rei
-    title_hint: 配当金の税金は20.315%｜NISAなら非課税になる金額を計算で確認
-    keyword: 配当金 税金 20.315% NISA 非課税
-    category: seido
-    intent: 配当にかかる税金の額と、NISAでの違いを数字で知りたい
-    outline: [配当にかかる税率の内訳, 配当額別の税額計算（算術のみ）, NISAで非課税になる条件, 受取方式の確認]
-    facts: [nisa_dividend_tax, dividend_method]
-
+- id: nisa-tax-merit-20315
+  title_hint: 新NISAの非課税メリットはいくら？20.315%の税金を具体例で確認
+  keyword: 新NISA 非課税 メリット 税金
+  category: seido
+  intent: NISAだと具体的に税金がどれだけ違うのか知りたい
+  outline:
+  - 通常の課税口座で税金がかかる仕組み
+  - 利益10万円・100万円の場合の税額の考え方（20.315%の算術のみ）
+  - NISAで非課税になる範囲
+  - 非課税でも残る注意点
+  facts:
+  - nisa_tax
+  - nisa_loss
+- id: nisa-loss-tsuusan-dekinai
+  title_hint: NISAは損益通算できない？損失が出たときのルールを整理
+  keyword: NISA 損益通算 できない 損失
+  category: seido
+  intent: NISAで損した場合に他の利益と相殺できるのか知りたい
+  outline:
+  - 損益通算とは
+  - NISAでの損失の扱い
+  - 特定口座との違い
+  - 損失リスクを踏まえた使い分けの考え方
+  facts:
+  - nisa_loss
+  - nisa_tax
+- id: nisa-baikyaku-waku-saikatsuyou
+  title_hint: NISAで売却したら枠はいつ戻る？再利用のルールと注意点
+  keyword: 新NISA 売却 枠 復活 翌年
+  category: seido
+  intent: 売却した後、いつ・どれだけ枠が使えるようになるのか知りたい
+  outline:
+  - 枠は簿価で管理される
+  - 売却した簿価分が翌年以降に再利用できる
+  - 同じ年には戻らない点
+  - 資金計画での注意
+  facts:
+  - nisa_reuse
+  - nisa_book_value
+  - nisa_lifetime
+- id: nisa-haitou-uketori-houhou
+  title_hint: NISAで配当金を非課税で受け取るには？受取方法の設定を確認
+  keyword: NISA 配当金 非課税 株式数比例配分方式
+  category: seido
+  intent: 配当を非課税にするために何を設定すればよいか知りたい
+  outline:
+  - NISAで配当が非課税になる仕組み
+  - 株式数比例配分方式とは
+  - 設定の確認手順の考え方
+  - 注意点
+  facts:
+  - dividend_method
+  - nisa_tax
+- id: nisa-kouza-kaisetsu-nenrei-hitori
+  title_hint: 新NISA口座は何歳から？1人1口座のルールと金融機関の変更
+  keyword: 新NISA 何歳から 1人1口座 金融機関 変更
+  category: seido
+  intent: 誰が・何口座開設できるのか、金融機関を変えられるのか知りたい
+  outline:
+  - 開設できる人
+  - 1人1口座の意味
+  - 金融機関の変更は年単位
+  - 変更時に気をつける点
+  facts:
+  - nisa_age
+  - nisa_permanent
+- id: nisa-boki-kanri-wakari-yasuku
+  title_hint: 新NISAの簿価管理とは？値上がりしても枠が増えない理由を図解風に解説
+  keyword: 新NISA 簿価 非課税保有限度額 仕組み
+  category: seido
+  intent: 生涯枠1,800万円がどう減る・戻るのか理解したい
+  outline:
+  - 簿価と時価の違い
+  - 値上がり・値下がりのときの枠の動き
+  - 売却時の枠の再利用
+  - よくある勘違い
+  facts:
+  - nisa_book_value
+  - nisa_lifetime
+  - nisa_reuse
+- id: nisa-muki-gen-permanent
+  title_hint: 新NISAは無期限で恒久化？長期投資で意識したいポイント
+  keyword: 新NISA 無期限 恒久化 メリット
+  category: seido
+  intent: 期限が無いことで何が変わるのか知りたい
+  outline:
+  - 旧制度との違いは書かず現行ルールのみ説明
+  - 期限がない意味
+  - 長く持つときの注意（損失リスク・コスト）
+  - 出口を考える視点
+  facts:
+  - nisa_permanent
+  - nisa_reuse
+  - nisa_tax
+- id: tsumitate-taishou-shohin-toha
+  title_hint: つみたて投資枠の対象商品とは？選ぶときの見方
+  keyword: つみたて投資枠 対象商品 投資信託
+  category: seido
+  intent: つみたて投資枠で何が買えるのか、どう選べばよいか知りたい
+  outline:
+  - 対象商品の条件（金融庁への届出）
+  - 成長投資枠との違い
+  - 商品を選ぶときに確認する項目
+  - 特定の商品名は挙げない
+  facts:
+  - tsumitate_products
+  - nisa_frames
+- id: seicho-toushiwaku-ikkatsu-chuui
+  title_hint: 成長投資枠で一括投資するときの注意点｜タイミングと上限の考え方
+  keyword: 成長投資枠 一括投資 注意点
+  category: seido
+  intent: 成長投資枠でまとまった額を投資するときの注意点を知りたい
+  outline:
+  - 一括投資ができるのは成長投資枠
+  - 年間240万円・生涯1
+  - 200万円の上限
+  - 購入時期を分ける考え方
+  - 損失と損益通算の注意
+  facts:
+  - growth_lump
+  - nisa_frames
+  - nisa_lifetime
+  - nisa_loss
+- id: nisa-nenkan-360-breakdown
+  title_hint: 新NISAの年間360万円の内訳｜つみたて120万円＋成長240万円の使い方
+  keyword: 新NISA 年間360万円 内訳
+  category: seido
+  intent: 年間の枠をどう配分して使えるのか知りたい
+  outline:
+  - 年間の枠の内訳
+  - 併用の考え方
+  - 使い切らなくてよい理由
+  - 生涯枠との関係
+  facts:
+  - nisa_frames
+  - nisa_lifetime
+- id: nisa-monthly-amount-how-to-decide
+  title_hint: 新NISAで毎月いくら積み立てる？金額を決める判断の順序
+  keyword: 新NISA 毎月 いくら 積立額 決め方
+  category: tsumitate
+  intent: 自分に合った積立額の決め方を知りたい
+  outline:
+  - 生活防衛資金を先に確保
+  - 余裕資金の考え方
+  - シミュレーターで幅を見る
+  - 途中で変更できること
+  facts:
+  - nisa_frames
+  - nisa_lifetime
+- id: nisa-vs-tokutei-kouza
+  title_hint: NISA口座と特定口座の違いを比較｜税金・損益通算・使い分け
+  keyword: NISA 特定口座 違い 比較
+  category: seido
+  intent: NISA口座と課税口座の違いと使い分けを知りたい
+  outline:
+  - 税金の違い
+  - 損益通算の違い
+  - 枠の有無
+  - 併用の考え方
+  facts:
+  - nisa_tax
+  - nisa_loss
+  - nisa_frames
+- id: nisa-kouza-kaisetsu-go-checklist
+  title_hint: 新NISA口座を開いたあとにやること｜最初の1か月のチェックリスト
+  keyword: 新NISA 口座開設後 やること 積立設定
+  category: kouza
+  intent: 口座開設後に何をすればよいか知りたい
+  outline:
+  - 入金
+  - 買う商品の確認（コスト・中身）
+  - 積立設定
+  - 配当の受取方法確認
+  - 定期的な見直し
+  facts:
+  - nisa_frames
+  - dividend_method
+  - tsumitate_products
+- id: market-nikkei-vs-sp500-reading
+  title_hint: 日経平均とS&P500を並べて見る｜自動更新データの読み方
+  keyword: 日経平均 S&P500 比較 推移
+  category: market
+  intent: 日米の株価指数の動きを比べる見方を知りたい
+  outline:
+  - 表の見方（最新値・騰落率・高値からの下落率）
+  - 指数ごとの通貨の違い
+  - 短期の比較で注意する点
+  - 積立との付き合い方
+  facts:
+  - nisa_frames
+  needs_market: true
+- id: market-usdjpy-effect-on-tsumitate
+  title_hint: 為替（ドル円）が円建ての積立評価額に与える影響の見方
+  keyword: ドル円 為替 積立 評価額 影響
+  category: market
+  intent: 為替の動きが円建ての評価額にどう影響するか知りたい
+  outline:
+  - ドル建て資産と円建て評価額
+  - 円高・円安の影響の方向
+  - 為替の予想に頼らない考え方
+  - 表の見方
+  facts:
+  - nisa_frames
+  needs_market: true
+- id: tokutei-loss-kurikoshi-shinkoku
+  title_hint: 特定口座の損失は3年間繰り越せる？確定申告が必要なケースを整理
+  keyword: 株 損失 繰越控除 3年 確定申告 特定口座
+  category: seido
+  intent: 課税口座で損失が出たときの繰越控除と確定申告のルールを知りたい
+  outline:
+  - 損益通算と繰越控除の違い
+  - 翌年以後3年間の繰越
+  - 申告が必要な理由（譲渡がなかった年も）
+  - NISA口座との違い
+  facts:
+  - tokutei_loss
+  - nisa_loss
+- id: tsumitate-taishou-kakudai-2027
+  title_hint: 2027年からつみたて投資枠の対象商品はどう変わる？改正内容を整理
+  keyword: つみたて投資枠 対象商品 拡充 2027 改正
+  category: seido
+  intent: 2027年からの対象商品の変更点を知りたい
+  outline:
+  - 現行の対象商品の要件
+  - 対象株式指数の追加
+  - 債券中心の投資信託の追加
+  - 定期売却サービスの手数料
+  - 利用者が確認すべきこと
+  facts:
+  - tsumitate_expansion_2027
+  - tsumitate_requirements
+  - tsumitate_products
+- id: nisa-haitou-tax-20315-rei
+  title_hint: 配当金の税金は20.315%｜NISAなら非課税になる金額を計算で確認
+  keyword: 配当金 税金 20.315% NISA 非課税
+  category: seido
+  intent: 配当にかかる税金の額と、NISAでの違いを数字で知りたい
+  outline:
+  - 配当にかかる税率の内訳
+  - 配当額別の税額計算（算術のみ）
+  - NISAで非課税になる条件
+  - 受取方式の確認
+  facts:
+  - nisa_dividend_tax
+  - dividend_method
+- id: nisa-1800-uchiwake
+  title_hint: 新NISAの1,800万円の内訳｜成長投資枠1,200万円までのルールと使い方
+  keyword: 新NISA 1800万円 内訳
+  category: seido
+  intent: 生涯投資枠1,800万円の内訳と、成長投資枠が1,200万円までに制限される理由を知りたい
+  outline:
+  - 生涯投資枠1,800万円の内訳：つみたて投資枠1,800万円まで、成長投資枠1,200万円まで
+  - 成長投資枠だけで埋める場合は1,200万円で上限に達する
+  - つみたて投資枠を優先すれば1,800万円まで使える理由
+  - 併用パターン別のシミュレーション（成長600万+つみたて1,200万など）
+  facts:
+  - nisa_lifetime
+  - nisa_frames
+- id: nisa-waku-fukkatsu-itsukara
+  title_hint: NISAで売却した枠はいつから使える？翌年以降の復活タイミングと注意点
+  keyword: NISA 枠 復活 いつから
+  category: seido
+  intent: 売却で空いた枠がいつから再利用できるのか、具体的なタイミングを知りたい
+  outline:
+  - 売却した年内には枠は復活しない（再利用は翌年以降）
+  - 翌年1月1日から簿価分の枠が再利用可能になる
+  - 年末に売却した場合のタイムラグの例
+  - 枠の復活を前提にした売買計画の注意点
+  facts:
+  - nisa_reuse
+  - nisa_book_value
+- id: nisa-haitou-zeiritsu-keisan
+  title_hint: NISAで配当にかかる税金はいくら？20.315%の内訳と非課税効果の計算例
+  keyword: NISA 配当 税金 いくら
+  category: seido
+  intent: 配当にかかる税率20.315%の内訳と、NISA口座で非課税になる金額を具体的に知りたい
+  outline:
+  - 配当金にかかる税金20.315%の内訳（所得税15%+復興特別所得税0.315%+住民税5%）
+  - NISA口座で株式数比例配分方式を選べば全額非課税
+  - 年間配当10万円・30万円・50万円の場合の節税額
+  - 課税口座との手取り額の比較表
+  facts:
+  - nisa_dividend_tax
+  - dividend_method
+- id: nisa-kouza-henkou-timing
+  title_hint: NISA口座の金融機関変更はいつできる？年単位のルールと手続きのタイミング
+  keyword: NISA 金融機関 変更 いつ
+  category: kouza
+  intent: NISA口座の金融機関をいつ・どのタイミングで変更できるのか知りたい
+  outline:
+  - 金融機関の変更は年単位で可能（1年ごとに1回）
+  - 変更したい年の前年10月～当年9月が手続きの目安期間
+  - その年に既に買付をしていると変更は翌年からになる
+  - 変更前の口座の商品は元の金融機関で保有し続ける
+  facts:
+  - nisa_age
+- id: tsumitate-waku-only-tsukaikata
+  title_hint: つみたて投資枠だけ使う場合の年間上限と埋まるまでの期間｜成長投資枠を使わない選択
+  keyword: つみたて投資枠 だけ
+  category: tsumitate
+  intent: つみたて投資枠だけを使う場合の年間上限と、1,800万円に到達するまでの年数を知りたい
+  outline:
+  - つみたて投資枠だけなら年間120万円まで投資可能
+  - 生涯投資枠1,800万円をつみたて投資枠だけで埋める場合は15年
+  - 成長投資枠を使わないメリット（対象商品の低コスト、積立の自動化）
+  - 毎月10万円（年120万円）の積立パターン例
+  facts:
+  - nisa_frames
+  - nisa_lifetime
+- id: nisa-sonshitsu-deta-baai
+  title_hint: NISA口座で損失が出たらどうなる？損益通算できない理由と対処の考え方
+  keyword: NISA 損失 どうなる
+  category: seido
+  intent: NISA口座で含み損や売却損が出た場合の取り扱いと、課税口座との違いを知りたい
+  outline:
+  - NISA口座の損失は他の口座の利益と損益通算できない
+  - 翌年以降への繰越控除もできない（課税口座との違い）
+  - 損失が出ても非課税枠は簿価で消費され、売却しても枠は簿価分しか戻らない
+  - 損失を前提にしない長期投資の考え方
+  facts:
+  - nisa_loss
+  - nisa_book_value
+  - tokutei_loss

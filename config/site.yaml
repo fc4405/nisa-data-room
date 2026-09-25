@@ -8,7 +8,7 @@ site:
   language: ja
   operator_name: "ぼちゅ"
   operator_profile: "個人で新NISAと資産形成について調べ、公的な一次情報と数字をもとに記事にまとめています。"
-  contact_email: ""
+  contact_email: "fc4405@gmail.com"
   ga_measurement_id: ""        # 任意: GA4の測定ID (G-XXXXXXX)
   google_site_verification: ""  # 任意: Search Consoleの「HTMLタグ」確認用 content 値
   adsense_client: ""           # 任意: AdSenseのクライアントID (ca-pub-...)。審査通過後に設定

@@ -140,9 +140,10 @@
       }
       var steps = [
         ["制度の全体像をつかむ（学ぶ順番ガイド）", "/guide/"],
-        ["月" + man(monthly) + "で積立額をシミュレーションする", "/tools/nisa-simulator/"],
-        ["証券口座を選ぶ基準を確認する", "/articles/nisa-kouza-erabikata/"],
-        ["口座を開いたあとにやることを確認する", "/articles/nisa-kouza-kaisetsu-go-checklist/"]
+        ["月" + man(monthly) + "で積立額をシミュレーションする", "/tools/nisa-simulator/?monthly=" + monthly],
+        ["証券口座を選んで、申し込む（本人確認書類とマイナンバーを準備）", "/articles/nisa-kouza-erabikata/"],
+        ["口座を開いたあとにやることを確認する（積立設定など）", "/articles/nisa-kouza-kaisetsu-go-checklist/"],
+        ["積立額を決めて、運用を続ける", "/articles/nisa-monthly-amount-how-to-decide/"]
       ];
       var h = '<div class="kv big"><dt>まずの積立額の目安</dt><dd>月' + man(monthly) + 'から</dd></div>';
       h += '<p class="hint">' + lines.join(" ") + '</p>';
@@ -212,8 +213,21 @@
     })()
   };
 
+  /* 診断ツール等から「?monthly=10000」のようにリンクされた場合、
+     同名のフォーム項目にその値を反映してから計算する（導線のズレ防止）。 */
+  function prefillFromQuery(form) {
+    try {
+      var params = new URLSearchParams(window.location.search);
+      params.forEach(function (value, name) {
+        var el = form.elements[name];
+        if (el && value !== "" && (el.tagName === "INPUT" || el.tagName === "SELECT")) el.value = value;
+      });
+    } catch (e) { /* 古い環境などでURLSearchParamsが使えない場合は何もしない */ }
+  }
+
   if (typeof document !== "undefined") document.querySelectorAll("form.calc").forEach(function (form) {
     var key = form.getAttribute("data-tool"), out = document.querySelector('[data-result="' + key + '"]');
+    prefillFromQuery(form);
     function run() { out.innerHTML = tools[key](form); }
     form.addEventListener("input", run);
     form.addEventListener("submit", function (e) { e.preventDefault(); run(); });

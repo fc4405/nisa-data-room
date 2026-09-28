@@ -323,3 +323,97 @@ topics:
   - nisa_loss
   - nisa_book_value
   - tokutei_loss
+- id: nisa-1800-nenrei-jikan
+  title_hint: 新NISAの1,800万円を埋めるのに何年かかる？年齢別で考える投資期間
+  keyword: 新NISA 1800万円 何年
+  category: seido
+  intent: 生涯投資枠1,800万円を使い切るのにどれくらい時間がかかるか、年齢と投資期間の関係を知りたい
+  outline:
+  - 1,800万円の枠は年間360万円まで（つみたて120万円+成長240万円）投資できる
+  - 年間360万円を投資すれば最短5年で枠が埋まる計算になる
+  - 年齢別の投資期間と非課税で保有できる無期限の制度を組み合わせて考える
+  - 毎月の投資額別（1万・3万・5万・10万・30万円）で何年かかるかの早見表
+  - 投資期間が長くなると複利の効果も大きくなる点を補足
+  facts:
+  - nisa_frames
+  - nisa_lifetime
+  - nisa_permanent
+- id: nisa-tsumitate-seicho-ryouhou-tsukau
+  title_hint: つみたて投資枠と成長投資枠は両方使える？併用のルールと使い分け例
+  keyword: 新NISA つみたて 成長 併用
+  category: seido
+  intent: つみたて投資枠と成長投資枠を同時に使えるか、併用する場合のルールを知りたい
+  outline:
+  - つみたて投資枠120万円と成長投資枠240万円は併用でき、合計年間360万円まで投資できる
+  - 生涯投資枠1,800万円のうち成長投資枠は1,200万円までという制限がある
+  - つみたて枠は積立投資のみ、成長枠は一括・積立どちらも可能
+  - 併用する場合の枠の消化パターン例（つみたて満額+成長一部、つみたて一部+成長満額など）
+  - 対象商品が異なるため、目的に応じて使い分ける
+  facts:
+  - nisa_frames
+  - nisa_lifetime
+  - growth_lump
+  - tsumitate_products
+- id: nisa-baikyaku-sonohi-waku
+  title_hint: NISAで買った日に売ったら枠はどうなる？同じ年内の売却と枠の関係
+  keyword: NISA 売却 当日 枠
+  category: seido
+  intent: NISA口座で購入した商品をすぐに売却した場合、投資枠がどう扱われるか知りたい
+  outline:
+  - 売却しても簿価分の枠が戻るのは翌年以降で、同じ年内には復活しない
+  - 買った当日や同じ月に売っても、その年の投資枠は消費されたまま
+  - 年間投資枠（つみたて120万円、成長240万円）の管理は年単位で行われる
+  - 頻繁に売買すると年間枠を早く使い切ってしまうリスク
+  - 長期保有を前提とした制度設計であることを理解する
+  facts:
+  - nisa_reuse
+  - nisa_frames
+  - nisa_book_value
+- id: nisa-seicho-waku-kabushiki-chuui
+  title_hint: 成長投資枠で個別株を買うときの注意点｜対象外銘柄と1,200万円の上限
+  keyword: 新NISA 成長投資枠 個別株
+  category: seido
+  intent: 成長投資枠で個別の上場株式を購入する際のルールと制限を知りたい
+  outline:
+  - 成長投資枠では上場株式を購入できるが、整理銘柄・監理銘柄は対象外
+  - 生涯投資枠1,800万円のうち成長投資枠は1,200万円まで
+  - 一括購入も積立購入も可能で、年間240万円まで投資できる
+  - 個別株の配当を非課税で受け取るには株式数比例配分方式の設定が必要
+  - 損失が出ても損益通算や繰越控除ができない点に注意
+  facts:
+  - tsumitate_products
+  - nisa_lifetime
+  - growth_lump
+  - nisa_frames
+  - dividend_method
+  - nisa_loss
+- id: nisa-tsumitate-waku-toshishintaku-erabikata
+  title_hint: つみたて投資枠で選べる投資信託の条件とは？要件を5つに整理
+  keyword: つみたて投資枠 投資信託 条件
+  category: tsumitate
+  intent: つみたて投資枠で購入できる投資信託がどのような要件を満たしているか具体的に知りたい
+  outline:
+  - つみたて投資枠は積立・分散投資に適した一定の要件を満たす公募株式投資信託に限られる
+  - '要件1: 信託契約期間が無期限または20年以上'
+  - '要件2: 毎月分配型でないこと'
+  - '要件3: 販売手数料が0％（ノーロード）'
+  - '要件4: 信託報酬が低水準であること'
+  - 2027年からは対象指数の追加や債券中心の投資信託も追加される予定
+  facts:
+  - tsumitate_requirements
+  - tsumitate_products
+  - tsumitate_expansion_2027
+- id: nisa-kadai-kouza-sonetsu-kurikoshi
+  title_hint: 課税口座の損益通算・繰越控除とは？NISAとの違いを制度で比較
+  keyword: 損益通算 繰越控除 NISA
+  category: seido
+  intent: 課税口座（特定口座・一般口座）で使える損益通算と繰越控除の仕組みと、NISAで使えない理由を知りたい
+  outline:
+  - 課税口座では譲渡損失が出たとき、配当所得（申告分離課税）と損益通算できる
+  - 引ききれない損失は翌年以後3年間繰り越して控除できる（確定申告が必要）
+  - NISA口座で生じた損失は損益通算も繰越控除もできない
+  - NISAは利益が非課税になる代わりに、損失は税制上ないものとして扱われる
+  - 課税口座とNISA口座の使い分けを考える際のポイント
+  facts:
+  - tokutei_loss
+  - nisa_loss

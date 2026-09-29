@@ -60,5 +60,11 @@
       "根拠なし: 売却した資産の購入時の金額（簿価）が生涯投資枠から差し引かれるという簿価管理の仕組み",
       "根拠なし: 課税口座は複数の金融機関で持てるという制度上の記述"
     ]
+  },
+  "tsumitate-waku-only-tsukaikata": {
+    "attempts": 1,
+    "last_try": "2026-09-30",
+    "last_result": "published",
+    "reasons": []
   }
 }

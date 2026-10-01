@@ -66,5 +66,10 @@
     "last_try": "2026-09-30",
     "last_result": "published",
     "reasons": []
+  },
+  "nisa-sonshitsu-deta-baai": {
+    "attempts": 1,
+    "last_try": "2026-10-02",
+    "last_result": "error: Extra data: line 6 column 1 (char 60)"
   }
 }

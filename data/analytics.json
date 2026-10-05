@@ -1,17 +1,18 @@
 {
-  "date": "2026-09-28",
+  "date": "2026-10-05",
   "inventory": {
-    "count": 30,
+    "count": 31,
     "stale": [],
     "orphans": [
+      "tsumitate-waku-only-tsukaikata",
       "nisa-waku-fukkatsu-itsukara",
       "nisa-haitou-zeiritsu-keisan"
     ],
-    "chars": 68008
+    "chars": 71836
   },
   "gsc": null,
   "generation": {
-    "attempted": 8,
+    "attempted": 10,
     "problems": {
       "nisa-haitou-tax-20315-rei": [
         "根拠なし: 年間10万円の配当なら約2万円、50万円なら約10万円が税金で引かれる",
@@ -28,7 +29,8 @@
         "根拠なし: NISA口座の開設や変更に手数料がかからないという記述",
         "根拠なし: 売却した資産の購入時の金額（簿価）が生涯投資枠から差し引かれるという簿価管理の仕組み",
         "根拠なし: 課税口座は複数の金融機関で持てるという制度上の記述"
-      ]
+      ],
+      "nisa-sonshitsu-deta-baai": "error: Extra data: line 8 column 1 (char 110)"
     },
     "drafts": [
       "nisa-haitou-tax-20315-rei",

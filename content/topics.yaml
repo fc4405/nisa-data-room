@@ -417,3 +417,87 @@ topics:
   facts:
   - tokutei_loss
   - nisa_loss
+- id: nisa-shogai-waku-1800-keisan
+  title_hint: 新NISAの生涯投資枠1,800万円はどう計算される？簿価管理と残高の見方
+  keyword: 新NISA 生涯投資枠 計算
+  category: seido
+  intent: 生涯投資枠1,800万円がどのように計算・管理されているのか、残りの枠をどう確認すればよいかを知りたい
+  outline:
+  - 生涯投資枠は購入時の簿価で計算され、値上がり・値下がりは影響しない
+  - つみたて投資枠と成長投資枠の合計で1,800万円、成長投資枠は内数で1,200万円まで
+  - 売却すると簿価分の枠が翌年以降に復活する仕組み
+  - 証券会社の管理画面で使用済み枠と残り枠を確認できる
+  facts:
+  - nisa_lifetime
+  - nisa_book_value
+  - nisa_reuse
+  - nisa_frames
+- id: nisa-nenkan-waku-fukusuu-nen
+  title_hint: 新NISAの年間投資枠は繰り越せる？使い切れなかった枠の扱い
+  keyword: 新NISA 年間投資枠 繰り越し
+  category: seido
+  intent: 年間360万円の投資枠を使い切れなかった場合、翌年以降に繰り越せるのか知りたい
+  outline:
+  - 年間投資枠（つみたて120万円・成長240万円）は各年ごとにリセットされ、繰り越せない
+  - 生涯投資枠1,800万円は累積で管理されるため、使わなかった分は将来使える
+  - 毎年の投資枠を無理に使い切る必要はなく、自分のペースで計画できる
+  - 売却で復活する枠は翌年以降の年間枠とは別に扱われる
+  facts:
+  - nisa_frames
+  - nisa_lifetime
+  - nisa_reuse
+  - nisa_permanent
+- id: nisa-seicho-waku-tsumitate-chigai
+  title_hint: 成長投資枠で積立購入はできる？つみたて投資枠との違いを整理
+  keyword: 成長投資枠 積立
+  category: seido
+  intent: 成長投資枠でも積立ができるのか、つみたて投資枠と何が違うのか知りたい
+  outline:
+  - 成長投資枠は一括購入も積立購入もできる、つみたて投資枠は積立のみ
+  - 成長投資枠は上場株式・ETF・REITなど幅広い商品が対象
+  - つみたて投資枠は販売手数料0%、信託報酬低水準など厳選された投資信託のみ
+  - 年間枠は成長240万円・つみたて120万円で併用可能
+  facts:
+  - growth_lump
+  - nisa_frames
+  - tsumitate_products
+  - tsumitate_requirements
+- id: nisa-haitou-haibun-houhou-henkou
+  title_hint: 株式数比例配分方式とは？NISAで配当を非課税にするための設定
+  keyword: 株式数比例配分方式 とは
+  category: kouza
+  intent: 株式数比例配分方式が何か、どうやって設定するのか、なぜNISAで必要なのかを知りたい
+  outline:
+  - 株式数比例配分方式は証券会社の口座で配当を受け取る方法
+  - NISA口座で国内上場株式の配当を非課税にするにはこの方式が必須
+  - 配当金領収証方式など他の方式ではNISA口座でも非課税にならない
+  - 証券会社の管理画面で設定を確認・変更できる
+  facts:
+  - dividend_method
+  - nisa_dividend_tax
+- id: nisa-seicho-waku-taisho-gai
+  title_hint: 成長投資枠で買えないものは？対象外の銘柄と投資信託のルール
+  keyword: 成長投資枠 対象外
+  category: seido
+  intent: 成長投資枠で購入できない商品・銘柄が具体的に何か知りたい
+  outline:
+  - 整理銘柄・監理銘柄の上場株式は対象外
+  - 信託期間20年未満の投資信託は買えない
+  - 毎月分配型の投資信託は対象外
+  - つみたて投資枠対象の投資信託は成長投資枠でも購入できる
+  facts:
+  - tsumitate_products
+  - growth_lump
+- id: nisa-18sai-mimansha-riyou
+  title_hint: 18歳未満は新NISAを使える？2027年からの未成年向け制度
+  keyword: 新NISA 18歳未満
+  category: seido
+  intent: 18歳未満の子どもが新NISAを利用できるのか、条件や制度の内容を知りたい
+  outline:
+  - 2026年時点では18歳以上（その年の1月1日時点）のみがNISA口座を開設できる
+  - 2027年からつみたて投資枠が0〜17歳にも拡充される
+  - 子が0〜17歳の間は年間60万円・生涯600万円の枠になる
+  - 12歳以降で本人の同意があれば親権者による払出しが可能
+  facts:
+  - nisa_age
+  - nisa_kids

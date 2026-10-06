@@ -68,8 +68,8 @@
     "reasons": []
   },
   "nisa-sonshitsu-deta-baai": {
-    "attempts": 2,
-    "last_try": "2026-10-05",
-    "last_result": "error: Extra data: line 8 column 1 (char 110)"
+    "attempts": 3,
+    "last_try": "2026-10-07",
+    "last_result": "error: Extra data: line 9 column 1 (char 148)"
   }
 }

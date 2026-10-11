@@ -82,5 +82,11 @@
       "根拠なし: 新NISAは非課税で保有できる期間に制限がない（無期限）",
       "根拠なし: 保有している資産を売却すると、翌年1月から売却した分の簿価（買付金額）が生涯投資枠に戻ります"
     ]
+  },
+  "nisa-tsumitate-seicho-ryouhou-tsukau": {
+    "attempts": 1,
+    "last_try": "2026-10-12",
+    "last_result": "published",
+    "reasons": []
   }
 }

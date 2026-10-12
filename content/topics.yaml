@@ -501,3 +501,68 @@ topics:
   facts:
   - nisa_age
   - nisa_kids
+- id: nisa-shogai-waku-keisan-houhou
+  title_hint: 新NISAの生涯投資枠1,800万円はどう計算される？簿価管理の仕組みと残高の見方
+  keyword: 新NISA 生涯投資枠 計算
+  category: seido
+  intent: 生涯投資枠の残高がどのように計算され、自分があといくら投資できるのかを知りたい
+  outline:
+  - 生涯投資枠は購入時の簿価で管理され、時価ではなく取得価額の合計で計算される
+  - 成長投資枠は1,200万円まで、残りはつみたて投資枠と成長投資枠で1,800万円まで使える
+  - 売却すると簿価分が翌年以降に復活するため、枠の残高は購入・売却の履歴で変動する
+  facts:
+  - nisa_lifetime
+  - nisa_book_value
+  - nisa_reuse
+- id: nisa-haitou-haibun-houhou-settei
+  title_hint: 株式数比例配分方式とは？NISAで配当を非課税にするための設定方法
+  keyword: 株式数比例配分方式 とは
+  category: kouza
+  intent: 株式数比例配分方式が何か、どうすれば設定できるのかを知りたい
+  outline:
+  - 株式数比例配分方式は証券会社の口座で配当を受け取る方法で、NISA口座の配当を非課税にする条件
+  - 配当金領収証方式や銀行振込では非課税にならないため、証券口座で受け取る設定が必要
+  - 証券会社の管理画面や書類で設定を確認・変更できる
+  facts:
+  - dividend_method
+  - nisa_dividend_tax
+- id: nisa-baikyaku-waku-shouka-itsumade
+  title_hint: NISAで売却した分の枠はいつまで復活する？簿価の消化と再利用の期限
+  keyword: NISA 売却 枠 期限
+  category: seido
+  intent: 売却して復活した枠に使用期限があるのか、いつまでに使わないといけないのかを知りたい
+  outline:
+  - 売却した簿価分の枠は翌年以降に復活し、復活した枠に使用期限はない
+  - 新NISAは制度が恒久化されているため、非課税保有期間も復活した枠も無期限で使える
+  - 年間投資枠360万円の制限は各年ごとにあるが、生涯投資枠の範囲内で何年かけて使ってもよい
+  facts:
+  - nisa_reuse
+  - nisa_permanent
+  - nisa_frames
+  - nisa_lifetime
+- id: nisa-seicho-waku-taisho-gaishutsu
+  title_hint: 成長投資枠で買えないものは？対象外になる商品の条件
+  keyword: 成長投資枠 対象外
+  category: seido
+  intent: 成長投資枠でどんな商品が買えないのか、除外される条件を知りたい
+  outline:
+  - 整理銘柄・監理銘柄に指定された株式は成長投資枠で買えない
+  - 信託期間20年未満の投資信託や毎月分配型の投資信託も対象外
+  - 上場株式、ETF、REIT、一定の投資信託は買えるが、商品ごとに条件を確認する必要がある
+  facts:
+  - tsumitate_products
+  - growth_lump
+- id: nisa-tokutei-kouza-heiyou
+  title_hint: NISAと特定口座は併用できる？使い分けと両方持つメリット
+  keyword: NISA 特定口座 併用
+  category: kouza
+  intent: NISA口座と特定口座を同時に使えるのか、どう使い分ければいいのかを知りたい
+  outline:
+  - NISA口座は1人1口座だが、特定口座は同時に持つことができ併用可能
+  - NISA口座は非課税だが損益通算できず、特定口座は課税されるが損益通算・繰越控除ができる
+  - NISA枠を使い切った後や損失リスクを分散したい場合に特定口座を併用する選択肢がある
+  facts:
+  - nisa_age
+  - nisa_loss
+  - nisa_tax
+  - tokutei_loss

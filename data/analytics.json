@@ -1,18 +1,17 @@
 {
-  "date": "2026-10-05",
+  "date": "2026-10-12",
   "inventory": {
-    "count": 31,
+    "count": 32,
     "stale": [],
     "orphans": [
-      "tsumitate-waku-only-tsukaikata",
-      "nisa-waku-fukkatsu-itsukara",
+      "nisa-tsumitate-seicho-ryouhou-tsukau",
       "nisa-haitou-zeiritsu-keisan"
     ],
-    "chars": 71836
+    "chars": 76003
   },
   "gsc": null,
   "generation": {
-    "attempted": 10,
+    "attempted": 12,
     "problems": {
       "nisa-haitou-tax-20315-rei": [
         "根拠なし: 年間10万円の配当なら約2万円、50万円なら約10万円が税金で引かれる",
@@ -30,9 +29,16 @@
         "根拠なし: 売却した資産の購入時の金額（簿価）が生涯投資枠から差し引かれるという簿価管理の仕組み",
         "根拠なし: 課税口座は複数の金融機関で持てるという制度上の記述"
       ],
-      "nisa-sonshitsu-deta-baai": "error: Extra data: line 8 column 1 (char 110)"
+      "nisa-sonshitsu-deta-baai": "error: Extra data: line 9 column 1 (char 148)",
+      "nisa-1800-nenrei-jikan": [
+        "根拠なし: 年間投資枠の上限は360万円（つみたて投資枠120万円+成長投資枠240万円の併用）",
+        "根拠なし: 生涯投資枠1,800万円のうち、成長投資枠で投資できる金額は最大1,200万円まで",
+        "根拠なし: 新NISAは非課税で保有できる期間に制限がない（無期限）",
+        "根拠なし: 保有している資産を売却すると、翌年1月から売却した分の簿価（買付金額）が生涯投資枠に戻ります"
+      ]
     },
     "drafts": [
+      "nisa-1800-nenrei-jikan",
       "nisa-haitou-tax-20315-rei",
       "nisa-kouza-henkou-timing"
     ]

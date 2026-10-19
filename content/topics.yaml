@@ -566,3 +566,82 @@ topics:
   - nisa_loss
   - nisa_tax
   - tokutei_loss
+- id: nisa-seicho-waku-1200-keisan
+  title_hint: 成長投資枠1,200万円の上限はどう計算する？簿価での管理と積立・一括の埋まり方
+  keyword: 成長投資枠 1200万円
+  category: seido
+  intent: 成長投資枠の1,200万円という上限がどのように計算され、管理されるのかを知りたい
+  outline:
+  - 成長投資枠は生涯投資枠1,800万円のうち最大1,200万円まで
+  - 簿価（購入時の金額）で管理されるため、値上がりしても枠は増えない
+  - 売却すると翌年以降に簿価分の枠が復活する
+  - 一括投資と積立投資での埋まり方の違い
+  facts:
+  - nisa_lifetime
+  - nisa_book_value
+  - nisa_reuse
+  - growth_lump
+- id: nisa-haitou-haibun-houhou-kakunin
+  title_hint: 株式数比例配分方式とは？NISAで配当を非課税にするための設定確認
+  keyword: 株式数比例配分方式 とは
+  category: kouza
+  intent: 株式数比例配分方式が何か、どうやって設定を確認・変更すればよいかを知りたい
+  outline:
+  - 株式数比例配分方式は証券会社の口座で配当を受け取る方式
+  - NISA口座で配当を非課税にするにはこの方式を選ぶ必要がある
+  - 配当金領収証方式などでは非課税にならない
+  - 証券会社の管理画面で設定状況を確認できる
+  facts:
+  - dividend_method
+  - nisa_dividend_tax
+- id: nisa-18sai-kaishi-timing
+  title_hint: 18歳になったらいつからNISA口座を開ける？成人のタイミングと利用開始年の考え方
+  keyword: NISA 18歳 いつから
+  category: kouza
+  intent: 18歳になるタイミングとNISA口座を開設できる時期の関係を知りたい
+  outline:
+  - NISA口座を開設できるのは18歳以上（利用する年の1月1日時点で成人）
+  - 誕生日が来る前でも、その年の1月1日時点で18歳なら利用できる
+  - 17歳の間は開設できず、18歳になる年の1月から可能
+  - 2027年以降は0〜17歳向けのつみたて投資枠も始まる
+  facts:
+  - nisa_age
+  - nisa_kids
+- id: nisa-baikyaku-go-zeikin
+  title_hint: NISAで売却した後の税金は？利益が出ても非課税、損失が出ても損益通算できない理由
+  keyword: NISA 売却 税金
+  category: seido
+  intent: NISA口座で売却したときに税金がどうなるのか、利益・損失それぞれのケースを知りたい
+  outline:
+  - NISA口座内で売却して利益が出ても税金はかからない（非課税）
+  - 通常の課税口座なら20.315%の税金がかかるところが0%
+  - 損失が出た場合は他の口座との損益通算ができない
+  - 翌年以降への繰越控除もできない
+  facts:
+  - nisa_tax
+  - nisa_loss
+- id: tsumitate-waku-120-koeru
+  title_hint: つみたて投資枠の120万円を超えるとどうなる？年間上限と成長投資枠との関係
+  keyword: つみたて投資枠 120万円 超える
+  category: tsumitate
+  intent: つみたて投資枠の年間上限120万円を超えて投資しようとした場合にどうなるかを知りたい
+  outline:
+  - つみたて投資枠の年間上限は120万円
+  - この枠を超える注文は受け付けられない、または翌年に繰り越される
+  - 成長投資枠（年間240万円）と併用すれば合計360万円まで投資可能
+  - 生涯投資枠1,800万円の残りがあれば翌年以降も投資を続けられる
+  facts:
+  - nisa_frames
+  - nisa_lifetime
+- id: nisa-kodomo-oya-hikidashi
+  title_hint: こどもNISAは親が引き出せる？12歳以降・同意ありの払出しルール
+  keyword: こどもNISA 払出し
+  category: seido
+  intent: 2027年以降の0〜17歳向けつみたて投資枠で、親権者がいつ・どう資金を引き出せるかを知りたい
+  outline:
+  - 2027年から始まるこどもNISA（0〜17歳向けつみたて投資枠）では払出しに制限がある
+  - 子が12歳以降で、子の同意がある場合に限り親権者等が払出しできる
+  - 年間投資枠は60万円、非課税保有限度額は600万円
+  - 18歳以降は通常のNISAに移行する
+  facts:
+  - nisa_kids

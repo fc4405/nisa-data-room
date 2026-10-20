@@ -110,5 +110,13 @@
     "last_try": "2026-10-19",
     "last_result": "published",
     "reasons": []
+  },
+  "nisa-kadai-kouza-sonetsu-kurikoshi": {
+    "attempts": 1,
+    "last_try": "2026-10-21",
+    "last_result": "rejected",
+    "reasons": [
+      "禁止表現を検出: 「損しない」"
+    ]
   }
 }

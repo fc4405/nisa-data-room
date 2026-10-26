@@ -645,3 +645,75 @@ topics:
   - 18歳以降は通常のNISAに移行する
   facts:
   - nisa_kids
+- id: nisa-seicho-waku-reit-etf
+  title_hint: 成長投資枠でREITやETFは買える？対象商品と選び方の注意点
+  keyword: 成長投資枠 REIT ETF
+  category: seido
+  intent: 成長投資枠でREITやETFが買えるのか知りたい
+  outline:
+  - 成長投資枠では上場株式・投資信託・ETF・REITなど幅広い商品が対象
+  - 整理銘柄・監理銘柄や信託期間20年未満などは対象外
+  - 成長投資枠は1,200万円まで、一括購入も積立購入も可能
+  facts:
+  - tsumitate_products
+  - growth_lump
+  - nisa_lifetime
+- id: nisa-baikyaku-eki-zeikin-kakutei
+  title_hint: NISA口座で売却した利益は確定申告が必要？非課税と申告不要の関係
+  keyword: NISA 売却益 確定申告
+  category: seido
+  intent: NISA口座で売却した利益に確定申告が必要か知りたい
+  outline:
+  - NISA口座内の売却益は非課税になる
+  - 非課税のため確定申告は不要（申告する必要もメリットもない）
+  - 課税口座では売却益に20.315%の税金がかかり、損失の繰越控除には確定申告が必要
+  facts:
+  - nisa_tax
+  - tokutei_loss
+- id: nisa-nenkan-waku-tsukawanai-kurikoshi
+  title_hint: 新NISAの年間投資枠は翌年に繰り越せる？使い切れなかった枠の扱い
+  keyword: 新NISA 年間投資枠 繰り越し
+  category: seido
+  intent: 年間投資枠を使い切れなかった場合に翌年に繰り越せるか知りたい
+  outline:
+  - 年間投資枠は毎年リセットされ、使わなかった分は翌年に繰り越せない
+  - 年間投資枠はつみたて投資枠120万円+成長投資枠240万円で合計360万円
+  - ただし生涯投資枠1,800万円の範囲内であれば、いつでも投資できる
+  facts:
+  - nisa_frames
+  - nisa_lifetime
+- id: nisa-haitou-haibun-houhou-zenbun-nisa
+  title_hint: 株式数比例配分方式にすると、すべての証券口座の配当はどうなる？
+  keyword: 株式数比例配分方式 すべての口座
+  category: kouza
+  intent: 株式数比例配分方式を選ぶと他の証券口座の配当受取にどう影響するか知りたい
+  outline:
+  - NISA口座で配当を非課税で受け取るには株式数比例配分方式が必要
+  - 課税口座（特定口座・一般口座）での配当には通常20.315%の税金がかかる
+  - 配当金領収証方式などでは非課税にならない
+  facts:
+  - dividend_method
+  - nisa_dividend_tax
+- id: kodomo-nisa-oyaken-haraidashi
+  title_hint: こどもNISAの払出しはいつから？親権者による引出しのルール
+  keyword: こどもNISA 払出し 親権者
+  category: seido
+  intent: こどもNISAで親権者がいつ払出しできるか知りたい
+  outline:
+  - 2027年からつみたて投資枠が0〜17歳に拡充される
+  - 子が12歳以降で子の同意がある場合に限り、親権者等による払出しができる
+  - 年間投資枠60万円、非課税保有限度額600万円
+  facts:
+  - nisa_kids
+- id: tsumitate-waku-taisho-shintaku-hanbai-tesuryo
+  title_hint: つみたて投資枠の対象投資信託は販売手数料0円？ノーロードの要件
+  keyword: つみたて投資枠 販売手数料 ノーロード
+  category: tsumitate
+  intent: つみたて投資枠の投資信託に販売手数料がかかるか知りたい
+  outline:
+  - つみたて投資枠の対象投資信託は販売手数料が0％（ノーロード）であることが要件
+  - 信託報酬が低水準、信託契約期間が無期限または20年以上、毎月分配型でないことも要件
+  - 2027年からは定期売却サービスに限った手数料の徴収が容認される
+  facts:
+  - tsumitate_requirements
+  - tsumitate_expansion_2027

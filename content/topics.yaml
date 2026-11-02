@@ -717,3 +717,77 @@ topics:
   facts:
   - tsumitate_requirements
   - tsumitate_expansion_2027
+- id: nisa-shogai-waku-zankou-kakunin
+  title_hint: 新NISAの生涯投資枠の残りはどうやって確認する？
+  keyword: 新NISA 生涯投資枠 残り 確認
+  category: seido
+  intent: 生涯投資枠1,800万円のうち、自分があとどれだけ投資できるのかを知りたい
+  outline:
+  - 生涯投資枠は簿価（購入時の金額）で管理され、1,800万円から使った分を引いた額が残り枠
+  - 証券会社のマイページやアプリで「NISA非課税保有限度額」「生涯投資枠残高」などの名称で確認できる
+  - 売却した分の簿価は翌年以降に枠が復活するため、残り枠は変動する
+  facts:
+  - nisa_lifetime
+  - nisa_book_value
+  - nisa_reuse
+- id: nisa-seicho-waku-1200-koeru
+  title_hint: 成長投資枠の1,200万円を超えたらどうなる？
+  keyword: 新NISA 成長投資枠 1200万円 超える
+  category: seido
+  intent: 成長投資枠の上限1,200万円に達したあと、さらに投資したい場合の扱いを知りたい
+  outline:
+  - 生涯投資枠1,800万円のうち、成長投資枠で使えるのは最大1,200万円まで
+  - 成長投資枠で1,200万円に達したあとは、つみたて投資枠で残り600万円まで投資できる
+  - 成長投資枠で購入した資産を売却すれば、翌年以降にその簿価分の成長投資枠が復活する
+  facts:
+  - nisa_lifetime
+  - nisa_reuse
+  - nisa_frames
+- id: nisa-18sai-1gatsu1nichi-itsukara
+  title_hint: 新NISA口座は18歳になる年の何月から使える？
+  keyword: 新NISA 18歳 いつから 1月1日
+  category: kouza
+  intent: 18歳になるタイミングで、いつからNISA口座を開設・利用できるのかを知りたい
+  outline:
+  - NISA口座を開設できるのは、その年の1月1日時点で18歳以上の方
+  - たとえば誕生日が12月でも、その年の1月1日に18歳なら年初から利用できる
+  - 口座は1人1口座で、金融機関は年単位で変更可能
+  facts:
+  - nisa_age
+- id: nisa-tsumitate-waku-120-ikkatsu
+  title_hint: つみたて投資枠で一括投資はできる？120万円の使い方
+  keyword: つみたて投資枠 一括 できない 120万円
+  category: tsumitate
+  intent: つみたて投資枠は積立専用なのか、まとめて投資できるのかを知りたい
+  outline:
+  - つみたて投資枠は積立投資のための枠で、一括（スポット）購入はできない
+  - 年間120万円の枠を使い切るには、毎月10万円の積立設定が必要
+  - 一括で投資したい場合は成長投資枠（年間240万円まで）を使う
+  facts:
+  - nisa_frames
+  - growth_lump
+  - tsumitate_products
+- id: nisa-haitou-haibun-henkou-ato
+  title_hint: 株式数比例配分方式に変更したら過去の配当はどうなる？
+  keyword: 株式数比例配分方式 変更 過去 配当 遡及
+  category: kouza
+  intent: 配当の受取方法を変更した場合、過去にすでに支払われた配当に影響があるのかを知りたい
+  outline:
+  - 配当の受取方法の変更は、変更後に支払われる配当から適用される
+  - 過去にすでに支払われた配当に遡って非課税にはならない
+  - NISA口座で配当を非課税にするには、配当の支払基準日までに株式数比例配分方式を設定しておく必要がある
+  facts:
+  - dividend_method
+  - nisa_dividend_tax
+- id: nisa-baikyaku-eki-tokutei-utsuseru
+  title_hint: NISA口座で売却した利益を課税口座で再投資するとどうなる？
+  keyword: NISA 売却 利益 課税口座 再投資 税金
+  category: seido
+  intent: NISA口座で非課税になった売却益を、課税口座（特定口座など）に移して投資した場合の税金を知りたい
+  outline:
+  - NISA口座で売却した利益は非課税で、その資金を引き出して課税口座に移すことは可能
+  - 課税口座で新たに投資した資産の売却益や配当には、通常どおり20.315%の税金がかかる
+  - NISA口座内の非課税メリットは売却時点で確定し、その後の運用先には引き継がれない
+  facts:
+  - nisa_tax
+  - nisa_dividend_tax

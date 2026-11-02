@@ -1,18 +1,20 @@
 {
-  "date": "2026-10-26",
+  "date": "2026-11-02",
   "inventory": {
-    "count": 35,
+    "count": 38,
     "stale": [],
     "orphans": [
-      "nisa-shogai-waku-1800-keisan",
+      "nisa-haitou-haibun-houhou-henkou",
+      "nisa-seicho-waku-tsumitate-chigai",
+      "nisa-nenkan-waku-fukusuu-nen",
       "nisa-tsumitate-waku-toshishintaku-erabikata",
       "nisa-haitou-zeiritsu-keisan"
     ],
-    "chars": 87597
+    "chars": 100192
   },
   "gsc": null,
   "generation": {
-    "attempted": 17,
+    "attempted": 20,
     "problems": {
       "nisa-haitou-tax-20315-rei": [
         "根拠なし: 年間10万円の配当なら約2万円、50万円なら約10万円が税金で引かれる",

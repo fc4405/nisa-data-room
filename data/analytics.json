@@ -1,20 +1,20 @@
 {
-  "date": "2026-11-02",
+  "date": "2026-11-09",
   "inventory": {
-    "count": 38,
+    "count": 40,
     "stale": [],
     "orphans": [
+      "nisa-shogai-waku-keisan-houhou",
+      "nisa-seicho-waku-taisho-gai",
       "nisa-haitou-haibun-houhou-henkou",
-      "nisa-seicho-waku-tsumitate-chigai",
-      "nisa-nenkan-waku-fukusuu-nen",
       "nisa-tsumitate-waku-toshishintaku-erabikata",
       "nisa-haitou-zeiritsu-keisan"
     ],
-    "chars": 100192
+    "chars": 108900
   },
   "gsc": null,
   "generation": {
-    "attempted": 20,
+    "attempted": 23,
     "problems": {
       "nisa-haitou-tax-20315-rei": [
         "根拠なし: 年間10万円の配当なら約2万円、50万円なら約10万円が税金で引かれる",
@@ -46,10 +46,18 @@
       ],
       "nisa-kadai-kouza-sonetsu-kurikoshi": [
         "禁止表現を検出: 「損しない」"
+      ],
+      "nisa-18sai-mimansha-riyou": [
+        "根拠なし: 2026年12月現在、NISA口座を開設できるのは、その年の1月1日時点で18歳以上の方に限られます",
+        "根拠なし: 18歳になったときに、通常のNISA制度（年間120万円・生涯1,800万円）に移行します",
+        "根拠なし: 払出しをした場合、その分の非課税保有限度額（600万円の枠）は復活します",
+        "根拠なし: 18歳以上の年間投資枠120万円（つみたて）＋240万円（成長）",
+        "根拠なし: 18歳以上の生涯投資枠1,800万円"
       ]
     },
     "drafts": [
       "nisa-1800-nenrei-jikan",
+      "nisa-18sai-mimansha-riyou",
       "nisa-baikyaku-sonohi-waku",
       "nisa-haitou-tax-20315-rei",
       "nisa-kadai-kouza-sonetsu-kurikoshi",

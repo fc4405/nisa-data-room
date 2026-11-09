@@ -791,3 +791,73 @@ topics:
   facts:
   - nisa_tax
   - nisa_dividend_tax
+- id: nisa-kouza-henkou-kanou-jiki
+  title_hint: 新NISA口座の金融機関はいつ変更できる？年単位のルールと手続きの流れ
+  keyword: 新NISA 金融機関 変更 いつ
+  category: kouza
+  intent: NISA口座の金融機関を変更したいが、いつから変更できるのか、年単位とはどういう意味か知りたい
+  outline:
+  - NISA口座は1人1口座で、金融機関は年単位で変更できるという基本ルール
+  - 年単位とは、変更したい年に新しい金融機関で買付を行うという意味
+  - 変更前の金融機関で保有中の資産はそのまま非課税で保有し続けられる
+  facts:
+  - nisa_age
+- id: nisa-haitou-haibairyo-tax-comparison
+  title_hint: 配当金の課税と非課税の比較｜NISA口座と課税口座で受取額はどう変わる？
+  keyword: 配当金 NISA 課税 比較
+  category: seido
+  intent: 配当金を受け取る際に、NISA口座と課税口座でどれだけ税金が違うのか具体的に知りたい
+  outline:
+  - 課税口座では配当に所得税15.315%+住民税5%の計20.315%が課税される
+  - NISA口座で株式数比例配分方式を選べば配当は非課税になる
+  - 同じ配当金額でも課税口座とNISA口座で手取り額に差が出る仕組み
+  facts:
+  - nisa_dividend_tax
+  - dividend_method
+- id: nisa-seicho-waku-1200-uchiwake
+  title_hint: 成長投資枠1,200万円の上限とは？生涯投資枠1,800万円との関係を整理
+  keyword: 成長投資枠 1200万円 上限
+  category: seido
+  intent: 成長投資枠が1,200万円までという制限の意味と、生涯投資枠1,800万円との関係を正確に理解したい
+  outline:
+  - 生涯投資枠1,800万円のうち、成長投資枠で使えるのは最大1,200万円まで
+  - つみたて投資枠は1,800万円まで使えるが、成長投資枠には内枠としての上限がある
+  - 成長投資枠を1,200万円使った場合、残り600万円はつみたて投資枠でのみ使える
+  facts:
+  - nisa_lifetime
+  - nisa_frames
+- id: tsumitate-waku-taisho-shintaku-shintaku-hoken
+  title_hint: つみたて投資枠の対象は投資信託だけ？信託期間や手数料の要件を確認
+  keyword: つみたて投資枠 対象 投資信託 要件
+  category: tsumitate
+  intent: つみたて投資枠で買える商品がどんな条件を満たしている必要があるのか、具体的な要件を知りたい
+  outline:
+  - つみたて投資枠の対象は公募株式投資信託で、積立・分散投資に適した一定の要件を満たすもの
+  - 信託期間が無期限または20年以上、毎月分配型でないことが条件
+  - 販売手数料0%（ノーロード）で、信託報酬が低水準であることも要件に含まれる
+  facts:
+  - tsumitate_products
+  - tsumitate_requirements
+- id: nisa-baikyaku-go-waku-keisan
+  title_hint: NISA口座で売却したら生涯投資枠はいくら戻る？簿価で復活する仕組みを確認
+  keyword: NISA 売却 枠 戻る 計算
+  category: seido
+  intent: NISA口座で保有商品を売却したとき、生涯投資枠がどのように復活するのか、計算方法を知りたい
+  outline:
+  - 売却した商品の購入時の取得価額（簿価）分の枠が翌年以降に復活する
+  - 値上がりして売却しても復活する枠は簿価のまま、値下がりしても同様
+  - 同じ年内には枠は復活せず、翌年1月から再利用可能になる
+  facts:
+  - nisa_reuse
+  - nisa_book_value
+- id: kodomo-nisa-60man-nen-shogai-600
+  title_hint: 2027年からのこどもNISAの枠はいくら？年間60万円・生涯600万円の仕組み
+  keyword: こどもNISA 年間 60万円 生涯 600万円
+  category: seido
+  intent: 2027年から始まる0〜17歳向けつみたて投資枠の年間投資枠と生涯投資枠の金額を正確に知りたい
+  outline:
+  - 2027年から0〜17歳はつみたて投資枠が利用可能になる
+  - 年間投資枠は60万円、非課税保有限度額（生涯投資枠）は600万円
+  - 子が12歳以降で同意がある場合に限り、親権者等による払出しができる
+  facts:
+  - nisa_kids

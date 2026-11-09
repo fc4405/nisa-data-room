@@ -160,5 +160,11 @@
       "根拠なし: 18歳以上の年間投資枠120万円（つみたて）＋240万円（成長）",
       "根拠なし: 18歳以上の生涯投資枠1,800万円"
     ]
+  },
+  "nisa-shogai-waku-keisan-houhou": {
+    "attempts": 1,
+    "last_try": "2026-11-09",
+    "last_result": "published",
+    "reasons": []
   }
 }

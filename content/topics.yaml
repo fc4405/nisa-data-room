@@ -861,3 +861,76 @@ topics:
   - 子が12歳以降で同意がある場合に限り、親権者等による払出しができる
   facts:
   - nisa_kids
+- id: nisa-haitou-sogo-tokubetsu-shotokuzei-uchiwake
+  title_hint: NISAの配当にかかる税金20.315%の内訳｜所得税・住民税・復興特別所得税の計算
+  keyword: NISA 配当 税金 内訳
+  category: seido
+  intent: 配当にかかる20.315%の税金の内訳（所得税15%、住民税5%、復興特別所得税の計算）を正確に知りたい
+  outline:
+  - 配当にかかる税金20.315%の3つの内訳
+  - 復興特別所得税2.1%の計算方法（15%×2.1%=0.315%）
+  - NISA口座で株式数比例配分方式を選ぶとこれらが全額非課税になる仕組み
+  facts:
+  - nisa_dividend_tax
+  - dividend_method
+- id: nisa-baikyaku-eki-hikazei-toha
+  title_hint: NISAで売却益が非課税とは？通常かかる20.315%の税金との比較
+  keyword: NISA 売却益 非課税
+  category: seido
+  intent: NISA口座で株や投資信託を売って利益が出たとき、非課税の意味と通常課税との違いを知りたい
+  outline:
+  - 上場株式等の売却益（譲渡益）に通常かかる税金20.315%の内訳
+  - NISA口座内の売却益は非課税になる仕組み
+  - 具体例：100万円の利益が出たとき、課税口座では約20万円が税金、NISA口座では0円
+  facts:
+  - nisa_tax
+  - nisa_dividend_tax
+- id: nisa-kouza-henkou-nen-tani-toha
+  title_hint: NISA口座の金融機関は年単位で変更できる｜「年単位」の意味と変更のタイミング
+  keyword: NISA 金融機関 変更 年単位
+  category: kouza
+  intent: NISA口座の金融機関を変更できる「年単位」とは具体的にどういう意味か、いつ変更できるのかを知りたい
+  outline:
+  - NISA口座は1人1口座で、金融機関は年単位で変更できるというルール
+  - 「年単位」の意味：同じ年の途中では変更できず、翌年から別の金融機関で新規買付ができる
+  - 変更前の金融機関で買った資産はそのまま非課税で保有を継続できる
+  facts:
+  - nisa_age
+- id: nisa-waku-fukkatsu-ikura-modoru
+  title_hint: NISAで売却したらいくら枠が戻る？簿価で復活する金額の計算
+  keyword: NISA 売却 枠 いくら戻る
+  category: seido
+  intent: NISA口座で保有商品を売却したとき、翌年以降に復活する枠の金額がいくらになるのかを知りたい
+  outline:
+  - 売却した商品の購入時の取得価額（簿価）が翌年以降に枠として復活する
+  - 値上がりして売っても、値下がりして売っても、戻る枠は簿価ベース
+  - 具体例：100万円で買った商品が150万円になって売却→戻る枠は100万円
+  facts:
+  - nisa_reuse
+  - nisa_book_value
+- id: tsumitate-waku-tsumitate-igi-toha
+  title_hint: つみたて投資枠は「積立」が必須？積立投資の意味と購入方法のルール
+  keyword: つみたて投資枠 積立 必須
+  category: tsumitate
+  intent: つみたて投資枠は名前に「つみたて」とあるが、必ず積立で買わないといけないのか、積立の定義を知りたい
+  outline:
+  - つみたて投資枠は積立投資のための枠（一括購入はできない）
+  - 成長投資枠は一括購入も積立購入もできる
+  - つみたて投資枠の対象商品は積立・分散投資に適した要件を満たす投資信託に限定
+  facts:
+  - growth_lump
+  - tsumitate_products
+- id: kodomo-nisa-18sai-iko-dou-naru
+  title_hint: こどもNISAは18歳になったらどうなる？制度移行と年間投資枠の変化
+  keyword: こどもNISA 18歳 移行
+  category: seido
+  intent: 2027年から始まるこどもNISA（0〜17歳のつみたて投資枠）を利用していた子が18歳になったとき、どう変わるのかを知りたい
+  outline:
+  - 0〜17歳の間は年間60万円・生涯600万円の枠
+  - 18歳以上（利用する年の1月1日時点）になると通常のNISA口座の対象になる
+  - 18歳以降は年間120万円（つみたて）+240万円（成長）、生涯1,800万円の枠を新たに使える
+  facts:
+  - nisa_kids
+  - nisa_age
+  - nisa_frames
+  - nisa_lifetime

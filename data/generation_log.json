@@ -190,5 +190,11 @@
     "last_try": "2026-11-18",
     "last_result": "published",
     "reasons": []
+  },
+  "nisa-seicho-waku-1200-keisan": {
+    "attempts": 1,
+    "last_try": "2026-11-20",
+    "last_result": "published",
+    "reasons": []
   }
 }

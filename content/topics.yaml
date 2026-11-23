@@ -934,3 +934,44 @@ topics:
   - nisa_age
   - nisa_frames
   - nisa_lifetime
+- id: nisa-nenkan-waku-kyonen-tsukawanakatta
+  title_hint: 新NISAで去年使わなかった枠は今年使える？年間投資枠の繰り越しルール
+  keyword: 新NISA 年間投資枠 繰り越し
+  category: seido
+  intent: 前年に投資しなかった年間投資枠が翌年に繰り越せるか知りたい
+  outline:
+  - 年間投資枠（つみたて120万円・成長240万円）は繰り越せない
+  - 毎年リセットされ、使わなかった分は消滅する
+  - 生涯投資枠1,800万円は残り続けるが、年間で使える上限は毎年固定
+  - 長期で計画を立てる際の考え方
+  facts:
+  - nisa_frames
+  - nisa_lifetime
+  - nisa_permanent
+- id: nisa-haitou-haibairyo-hikaku
+  title_hint: NISAと課税口座で配当にかかる税金はいくら違う？受取額の比較
+  keyword: NISA 配当 税金 比較
+  category: seido
+  intent: NISA口座と課税口座で配当金の手取り額がどれだけ違うか知りたい
+  outline:
+  - 課税口座では配当に20.315%の税金がかかる（所得税15.315%+住民税5%）
+  - NISA口座で株式数比例配分方式なら配当は非課税
+  - 配当額ごとの税額と手取り額の違いを具体例で比較
+  - 長期保有で配当を再投資する場合の複利効果の差
+  facts:
+  - nisa_dividend_tax
+  - dividend_method
+  - nisa_tax
+- id: nisa-sonshitsu-tokutei-utsuseru-ka
+  title_hint: NISAで損失が出た資産を特定口座に移せる？損益通算のための対応
+  keyword: NISA 損失 特定口座 移管
+  category: seido
+  intent: NISA口座で含み損の資産を課税口座に移して損益通算できるか知りたい
+  outline:
+  - NISA口座から課税口座への資産移管はできない（制度上認められていない）
+  - NISA口座内の損失は、売却しても課税口座との損益通算はできない
+  - 損失が出ている場合の対応は、保有を続けるか売却するかの2択
+  - 課税口座の損益通算・繰越控除との違いを整理
+  facts:
+  - nisa_loss
+  - tokutei_loss
